@@ -1,9 +1,9 @@
 import { Box, Paper, Typography } from "@mui/material";
 import { IBody } from "../../../types/cardType";
 
-import InputItem from "../inputs/InputItem";
-import SortInputItem from "../inputs/SortInputItem";
-import TextFieldItem from "../inputs/TextFieldItem";
+import TextInput from "../inputs/TextInput";
+import SortFieldInput from "../inputs/SortFieldInput";
+import TextFieldInput from "../inputs/TextFieldInput";
 
 interface ICardLang {
     item: IBody;
@@ -19,49 +19,49 @@ const UpdateCardLang: React.FC<ICardLang> = ({ item, lang, register }) => {
                     {"Мова: "}
                     {lang}
                 </Typography>
-                <InputItem
+                <TextInput
                     label={"Назва групи:"}
                     value={item?.title}
                     reg={register(`title_${lang}`)}
                 />
-                <InputItem
+                <TextInput
                     label={"Назва товару:"}
                     value={item?.name}
                     reg={register(`name_${lang}`)}
                 />
-                <TextFieldItem
+                <TextFieldInput
                     label={"Опис:"}
                     value={item?.description}
                     reg={register(`description_${lang}`)}
                 />               
-                <SortInputItem
+                <SortFieldInput
                     label={"Вид:"}
                     value_1={item?.sort?.key}
                     value_2={item?.sort?.value}
                     reg_1={register(`sort_${lang}_key`)}
                     reg_2={register(`sort_${lang}_value`)}
                 />
-                <InputItem
+                <TextInput
                     label={"Виробник:"}
                     value={item?.tm}
                     reg={register(`tm_${lang}`)}
                 />
-                <InputItem
+                <TextInput
                     label={"Країна:"}
                     value={item?.country}
                     reg={register(`country_${lang}`)}
                 />
-                <TextFieldItem
+                <TextFieldInput
                     label={"Текст 1:"}
                     value={item?.additional_text_1?.join("\n")}
                     reg={register(`additional_text_1_${lang}`)}
                 />
-                <TextFieldItem
+                <TextFieldInput
                     label={"Список:"}
                     value={item?.additional_list?.join("\n")}
                     reg={register(`additional_list_${lang}`)}
                 />
-                <TextFieldItem
+                <TextFieldInput
                     label={"Текст 2:"}
                     value={item?.additional_text_2?.join("\n")}
                     reg={register(`additional_text_2_${lang}`)}

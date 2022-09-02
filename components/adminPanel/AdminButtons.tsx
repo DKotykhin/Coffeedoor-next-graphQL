@@ -15,7 +15,7 @@ import { selectCollection } from "../../store/selectors";
 import { getData } from "./AdminApi";
 import { GET_ALLLIST, GET_ALLMENU } from "../../apollo/catalog";
 import { ICard } from "../../types/cardType";
-import FindText from "./items/FindText";
+import FindText from "./FindText";
 import { IMenu } from "../../types/menuType";
 
 const AdminButtons: React.FC = () => {

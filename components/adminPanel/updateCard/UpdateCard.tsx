@@ -5,10 +5,6 @@ import { useRouter } from "next/router";
 import { Container, Box, Button } from "@mui/material";
 import { toast } from "react-toastify";
 
-import InputItem from "../inputs/InputItem";
-import TextFieldItem from "../inputs/TextFieldItem";
-import RadioButtonItem from "../inputs/RadioButtonItem";
-import UpdateCardLang from "./UpdateCardLang";
 import { CardData } from "../formData/CardData";
 import { updateData, deleteData } from "../AdminApi";
 import {
@@ -16,6 +12,7 @@ import {
     deleteCardItem,
 } from "../../../store/adminSlice";
 import { ICard, INewCardData } from "../../../types/cardType";
+import CardForm from "../cardItems/CardForm";
 
 interface IUpdateCard {
     cardData: ICard;
@@ -73,57 +70,8 @@ const UpdateCard: React.FC<IUpdateCard> = ({ cardData, id, collection }) => {
         <Container sx={{ my: 2 }}>
             {cardData &&
                 <Box onSubmit={handleSubmit(onSubmit)} component="form">
-                    <UpdateCardLang
-                        item={item_ua}
-                        lang={"ua"}
-                        register={register}
-                    />
-                    <UpdateCardLang
-                        item={item_ru}
-                        lang={"ru"}
-                        register={register}
-                    />
-                    <UpdateCardLang
-                        item={item_en}
-                        lang={"en"}
-                        register={register}
-                    />
-
-                    <InputItem
-                        label={"Основне фото:"}
-                        value={cardData?.card_img}
-                        reg={register("card_img")}
-                    />
-                    <TextFieldItem
-                        label={"Детальні фото:"}
-                        value={cardData?.list_img.join(",\n")}
-                        reg={register("list_img")}
-                    />
-                    <InputItem
-                        label={"Вага:"}
-                        value={cardData?.weight}
-                        reg={register("weight")}
-                    />
-                    <InputItem
-                        label={"Ціна:"}
-                        value={cardData?.price}
-                        reg={register("price")}
-                    />
-                    <InputItem
-                        label={"Позиція:"}
-                        value={cardData?.position}
-                        reg={register("position")}
-                    />
-                    <RadioButtonItem
-                        label={"Під замовлення:"}
-                        value={cardData?.order}
-                        reg={register("order")}
-                    />
-                    <RadioButtonItem
-                        label={"Приховати картку:"}
-                        value={cardData?.hide}
-                        reg={register("hide")}
-                    />
+                   
+                    <CardForm cardData={cardData} register={register} />
 
                     <Box sx={{ textAlign: "center", mb: 4 }}>
                         <Button color="error" sx={{ mx: 2 }} onClick={onDelete}>

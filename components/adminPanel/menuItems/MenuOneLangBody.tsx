@@ -1,6 +1,6 @@
 import { Box, Paper } from "@mui/material";
 
-import CardText from "./CardText";
+import CardText from "../cardItems/CardText";
 
 interface IOneLang {
     item: {

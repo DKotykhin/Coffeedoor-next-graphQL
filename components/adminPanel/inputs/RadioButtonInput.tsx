@@ -13,7 +13,7 @@ interface IRadio {
     reg: Object
 }
 
-const RadioButtonItem: React.FC<IRadio> = ({ label, value, reg }) => {
+const RadioButtonInput: React.FC<IRadio> = ({ label, value, reg }) => {
     return (
         <Box sx={{ display: "flex", mb: 2 }}>
             <FormLabel sx={{ width: "150px", mt: 1 }}>{label}</FormLabel>
@@ -37,4 +37,4 @@ const RadioButtonItem: React.FC<IRadio> = ({ label, value, reg }) => {
     );
 };
 
-export default RadioButtonItem;
+export default RadioButtonInput;

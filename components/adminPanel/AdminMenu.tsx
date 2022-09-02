@@ -3,9 +3,9 @@ import { useAppDispatch } from "../../store/hook";
 
 import { Container, Button, Box } from "@mui/material";
 
-import CardText from "./items/CardText";
-import MenuOneLangTitle from "./items/MenuOneLangTitle";
-import MenuOneLangBody from "./items/MenuOneLangBody";
+import CardText from "./cardItems/CardText";
+import MenuOneLangTitle from "./menuItems/MenuOneLangTitle";
+import MenuOneLangBody from "./menuItems/MenuOneLangBody";
 
 import { cloneId } from "../../store/adminSlice";
 import { IMenu } from "../../types/menuType";

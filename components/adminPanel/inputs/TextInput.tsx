@@ -2,11 +2,11 @@ import { Box, InputLabel, Input } from "@mui/material";
 
 interface IInput {
     label: string;
-    value: string | number | undefined;
+    value?: string | number;
     reg: Object
 }
 
-const InputItem: React.FC<IInput> = ({ label, value, reg }) => {
+const TextInput: React.FC<IInput> = ({ label, value, reg }) => {
 
     return (
         <Box sx={{ display: "flex", mb: 2 }}>
@@ -20,4 +20,4 @@ const InputItem: React.FC<IInput> = ({ label, value, reg }) => {
     );
 };
 
-export default InputItem;
+export default TextInput;

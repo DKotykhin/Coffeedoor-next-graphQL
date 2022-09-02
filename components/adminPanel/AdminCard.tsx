@@ -3,8 +3,8 @@ import { useAppDispatch } from "../../store/hook";
 
 import { Container, Typography, Box, Button } from "@mui/material";
 
-import CardText from "./items/CardText";
-import CardOneLangBlock from "./items/CardOneLangBlock";
+import CardText from "./cardItems/CardText";
+import CardOneLangBlock from "./cardItems/CardOneLangBlock";
 import { cloneId } from "../../store/adminSlice";
 import { ICard } from "../../types/cardType";
 

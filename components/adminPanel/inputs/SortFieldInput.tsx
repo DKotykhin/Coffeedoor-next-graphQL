@@ -2,13 +2,13 @@ import { Box, InputLabel, Input } from "@mui/material";
 
 interface ISortInput {
     label: string;
-    value_1: string | undefined;
-    value_2: string | undefined;
+    value_1?: string;
+    value_2?: string;
     reg_1: Object;
     reg_2: Object
 }
 
-const SortInputItem: React.FC<ISortInput> = ({ label, value_1, value_2, reg_1, reg_2 }) => {
+const SortFieldInput: React.FC<ISortInput> = ({ label, value_1, value_2, reg_1, reg_2 }) => {
 
     return (
         <Box sx={{ display: "flex", mb: 2 }}>
@@ -27,4 +27,4 @@ const SortInputItem: React.FC<ISortInput> = ({ label, value_1, value_2, reg_1, r
     );
 };
 
-export default SortInputItem;
+export default SortFieldInput;

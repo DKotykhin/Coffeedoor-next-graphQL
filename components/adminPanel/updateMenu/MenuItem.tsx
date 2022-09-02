@@ -1,7 +1,7 @@
 import { Box, Paper } from "@mui/material";
 import { IBody, IMenu } from "../../../types/menuType";
 
-import InputItem from "../inputs/InputItem";
+import TextInput from "../inputs/TextInput";
 
 interface IMenuItem {
     item: IBody;
@@ -15,17 +15,17 @@ const MenuItem: React.FC<IMenuItem> = ({ item, register, j, k }) => {
     return (
         <Box sx={{ my: 1 }}>
             <Paper elevation={4} sx={{ p: 1 }}>
-                <InputItem
+                <TextInput
                     label={"Напій:"}
                     value={item?.name}
                     reg={register(`name${j}${k}`)}
                 />
-                <InputItem
+                <TextInput
                     label={"Опис:"}
                     value={item?.description}
                     reg={register(`desc${j}${k}`)}
                 />
-                <InputItem
+                <TextInput
                     label={"Ціна:"}
                     value={item?.price}
                     reg={register(`price${j}${k}`)}

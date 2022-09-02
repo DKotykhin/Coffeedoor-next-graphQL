@@ -6,7 +6,7 @@ interface IField {
     reg: Object
 }
 
-const TextFieldItem: React.FC<IField> = ({ label, value, reg }) => {
+const TextFieldInput: React.FC<IField> = ({ label, value, reg }) => {
     return (
         <Box sx={{ display: "flex", mb: 2 }}>
             <InputLabel sx={{ width: "120px", mt: 1 }}>{label}</InputLabel>
@@ -21,4 +21,4 @@ const TextFieldItem: React.FC<IField> = ({ label, value, reg }) => {
     );
 };
 
-export default TextFieldItem;
+export default TextFieldInput;
