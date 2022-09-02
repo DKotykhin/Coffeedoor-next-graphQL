@@ -1,5 +1,4 @@
 import Head from 'next/head';
-// import { useQuery } from '@apollo/client';
 import { GetServerSideProps } from 'next';
 
 import NavDrawer from "../components/drawer/Drawer";
@@ -15,18 +14,6 @@ import { ICatalogList } from '../types/cardType';
 
 
 const Home: React.FC<ICatalogList> = ({ cataloglist }) => {
-    // console.log(cataloglist)
-    // const { loading, error, data } = useQuery(GET_ALLLIST, {
-    //     variables: {
-    //         "query1": {"hide_ne": true},
-    //         "query2": {"hide_ne": true},
-    //         "query3": {"hide_ne": true},
-    //         "query4": {"hide_ne": true}
-    //       },    
-    //   });
-    // // console.log(loading);
-    // data && console.log(data);
-    // error && console.log(error);
 
     return (
         <div>
@@ -50,10 +37,8 @@ const Home: React.FC<ICatalogList> = ({ cataloglist }) => {
             </Head>
             <NavDrawer />
             <FirstBlock />
-            <InfoBlock />
-            {/* {data && */}
-            <Catalog cataloglist={cataloglist} />
-            {/* } */}
+            <InfoBlock />           
+            <Catalog cataloglist={cataloglist} />            
             <AboutBlock />
             <Basket />
         </div>

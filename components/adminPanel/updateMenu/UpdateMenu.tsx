@@ -12,11 +12,7 @@ import RadioButtonInput from "../inputs/RadioButtonInput";
 import MenuItemLang from "./MenuItemLang";
 import MenuAddNewItem from "./MenuAddNewItem";
 import { MenuData } from "../formData/MenuData";
-import { updateData, deleteData } from "../AdminApi";
-import {
-    updateMenuItem,
-    deleteMenuItem,
-} from "../../../store/adminSlice";
+
 import { IMenu } from "../../../types/menuType";
 
 interface IFormData {
@@ -25,11 +21,10 @@ interface IFormData {
 
 interface IUpdateMenu {
     cardData: IMenu,
-    id: any,
-    collection: string
+    id: any
 }
 
-const UpdateMenu: React.FC<IUpdateMenu> = ({ cardData, id, collection }) => {
+const UpdateMenu: React.FC<IUpdateMenu> = ({ cardData, id }) => {
     const [add, setAdd] = useState(false);
     const { handleSubmit, register } = useForm();
     const router = useRouter();
@@ -53,7 +48,7 @@ const UpdateMenu: React.FC<IUpdateMenu> = ({ cardData, id, collection }) => {
     };
 
     const onDelete = () => {
-        console.log("Видалити: ", id, collection);
+        console.log("Видалити: ", id);
         // deleteData(id, collection)
         //     .then((data) => {
         //         if (data.deletedCount) {

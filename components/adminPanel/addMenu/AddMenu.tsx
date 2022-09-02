@@ -12,20 +12,18 @@ import RadioButtonInput from "../inputs/RadioButtonInput";
 import MenuItemLang from "../updateMenu/MenuItemLang";
 import MenuAddNewItem from "../updateMenu/MenuAddNewItem";
 import { MenuData } from "../formData/MenuData";
-import { addData } from "../AdminApi";
+
 import { IMenu } from "../../../types/menuType";
-import { addMenuItem } from "../../../store/adminSlice";
 
 interface IFormData {
     [key: string]: string
 }
 
 interface IAddMenu {
-    cardData: IMenu,    
-    collection: string 
+    cardData: IMenu    
 }
 
-const AddMenu: React.FC<IAddMenu> = ({ cardData, collection }) => {
+const AddMenu: React.FC<IAddMenu> = ({ cardData }) => {
     const [add, setAdd] = useState(false);
     const { handleSubmit, register } = useForm();
     const router = useRouter();

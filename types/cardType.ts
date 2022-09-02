@@ -8,7 +8,8 @@ export interface ICatalogList {
 }
 
 export interface ICard extends INewCardData {
-    _id: string;    
+    _id: string;
+    __typename: string    
 }
 
 export interface INewCardData {      

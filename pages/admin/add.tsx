@@ -12,19 +12,11 @@ import { useAppSelector } from "../../store/hook";
 import AddCard from "../../components/adminPanel/addCard/AddCard";
 import AddMenu from "../../components/adminPanel/addMenu/AddMenu";
 import { GET_ALLLIST, GET_ALLMENU } from "../../apollo/catalog";
-
-import { ICard } from '../../types/cardType';
-import { IMenu } from '../../types/menuType';
+import Spinner from "../../components/spinner/Spinner";
 
 const AddPage: NextPage = () => {
     const { id } = useAppSelector(selectCollection);
 
-    // const pageMenuItem = collectiondata.menudata?.filter(
-    //     (item: IMenu) => item._id === id
-    // );    
-    // const pageCardItem = collectiondata.carddata?.filter(
-    //     (item: ICard) => item._id === id
-    // );
     const { loading, error, data } = useQuery(GET_ALLLIST, {
         variables: {
             "query1": { "_id_in": id },
@@ -52,6 +44,8 @@ const AddPage: NextPage = () => {
         }
     }
 
+    if (loading || menuLoading) return <Spinner />;
+
     return (
         <>
             <Head>
@@ -63,14 +57,8 @@ const AddPage: NextPage = () => {
             </Typography>
             {data ? (
                 <>
-                    <AddCard
-                        cardData={cardItem(data)}
-                        collection={'coffeelist_multilang'}
-                    />
-                    <AddMenu
-                        cardData={menuData?.menu_multi_news[0]}
-                        collection={'coffeelist_multilang'}
-                    />
+                    <AddCard cardData={cardItem(data)} />
+                    <AddMenu cardData={menuData?.menu_multi_news[0]} />
                 </>
 
             ) : (
