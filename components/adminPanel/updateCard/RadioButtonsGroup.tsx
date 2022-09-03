@@ -13,7 +13,7 @@ export default function RadioButtonsGroup({ onChange }: any) {
   };
 
   return (
-    <FormControl>
+    <FormControl sx={{mb: 2}}>
       <RadioGroup
         value={value}
         onChange={handleChange}

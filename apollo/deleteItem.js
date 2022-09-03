@@ -39,3 +39,13 @@ export const DELETE_MILLS_ITEM = gql `
         }
     }
 `;
+
+export const DELETE_MENU_ITEM = gql `
+    mutation DeleteMenuItem(
+        $delete: Menu_multi_newQueryInput!
+    ) {
+        deleteOneMenu_multi_new(query: $delete) {
+            _id
+        }
+    }
+`;

@@ -43,3 +43,14 @@ export const UPDATE_MILLS_ITEM = gql `
         }
     }
 `;
+
+export const UPDATE_MENU_ITEM = gql `
+    mutation UpdateMenuItem(
+        $query: Menu_multi_newQueryInput
+        $set: Menu_multi_newUpdateInput!
+    ) {
+        updateOneMenu_multi_new(query: $query, set: $set) {
+            _id
+        }
+    }
+`;

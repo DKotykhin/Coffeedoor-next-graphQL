@@ -11,11 +11,12 @@ import Spinner from "../../spinner/Spinner";
 import CardForm from "../cardItems/CardForm";
 import { CardData } from "../formData/CardData";
 import RadioButtonsGroup from "./RadioButtonsGroup";
+import ReturnLink from "./ReturnLink";
 
 import { UPDATE_COFFEE_ITEM, UPDATE_TEA_ITEM, UPDATE_JAM_ITEM, UPDATE_MILLS_ITEM } from "../../../apollo/updateItem";
 import { DELETE_COFFEE_ITEM, DELETE_TEA_ITEM, DELETE_JAM_ITEM, DELETE_MILLS_ITEM } from "../../../apollo/deleteItem";
 import { INSERT_COFFEE_ITEM, INSERT_TEA_ITEM, INSERT_JAM_ITEM, INSERT_MILLS_ITEM } from "../../../apollo/insertItem"
-import { GET_ALLLIST } from "../../../apollo/catalog";
+import { GET_ALL_LIST } from "../../../apollo/catalog";
 
 import { ICard, INewCardData } from "../../../types/cardType";
 
@@ -34,61 +35,61 @@ const UpdateCard: React.FC<IUpdateCard> = ({ cardData, id }) => {
     const router = useRouter();
 
     const [UpdateCoffeeItem, { data: CoffeeDataUpd, loading: CoffeeLoadingUpd, error: CoffeeErrorUpd }] = useMutation(UPDATE_COFFEE_ITEM, {
-        refetchQueries: [{ query: GET_ALLLIST }]
+        refetchQueries: [{ query: GET_ALL_LIST }]
     });
     const [UpdateTeaItem, { data: TeaDataUpd, loading: TeaLoadingUpd, error: TeaErrorUpd }] = useMutation(UPDATE_TEA_ITEM, {
-        refetchQueries: [{ query: GET_ALLLIST }]
+        refetchQueries: [{ query: GET_ALL_LIST }]
     });
     const [UpdateJamItem, { data: JamDataUpd, loading: JamLoadingUpd, error: JamErrorUpd }] = useMutation(UPDATE_JAM_ITEM, {
-        refetchQueries: [{ query: GET_ALLLIST }]
+        refetchQueries: [{ query: GET_ALL_LIST }]
     });
     const [UpdateMillsItem, { data: MillsDataUpd, loading: MillsLoadingUpd, error: MillsErrorUpd }] = useMutation(UPDATE_MILLS_ITEM, {
-        refetchQueries: [{ query: GET_ALLLIST }]
+        refetchQueries: [{ query: GET_ALL_LIST }]
     });
 
     const [DeleteCoffeeItem, { data: CoffeeDataDel, loading: CoffeeLoadingDel, error: CoffeeErrorDel }] = useMutation(DELETE_COFFEE_ITEM, {
-        refetchQueries: [{ query: GET_ALLLIST }]
+        refetchQueries: [{ query: GET_ALL_LIST }]
     });
     const [DeleteTeaItem, { data: TeaDataDel, loading: TeaLoadingDel, error: TeaErrorDel }] = useMutation(DELETE_TEA_ITEM, {
-        refetchQueries: [{ query: GET_ALLLIST }]
+        refetchQueries: [{ query: GET_ALL_LIST }]
     });
     const [DeleteJamItem, { data: JamDataDel, loading: JamLoadingDel, error: JamErrorDel }] = useMutation(DELETE_JAM_ITEM, {
-        refetchQueries: [{ query: GET_ALLLIST }]
+        refetchQueries: [{ query: GET_ALL_LIST }]
     });
     const [DeleteMillsItem, { data: MillsDataDel, loading: MillsLoadingDel, error: MillsErrorDel }] = useMutation(DELETE_MILLS_ITEM, {
-        refetchQueries: [{ query: GET_ALLLIST }]
+        refetchQueries: [{ query: GET_ALL_LIST }]
     });
 
     const [InsertCoffeeItem, { data: CoffeeDataIns, loading: CoffeeLoadingIns, error: CoffeeErrorIns }] = useMutation(INSERT_COFFEE_ITEM, {
-        refetchQueries: [{ query: GET_ALLLIST }]
+        refetchQueries: [{ query: GET_ALL_LIST }]
     });
     const [InsertTeaItem, { data: TeaDataIns, loading: TeaLoadingIns, error: TeaErrorIns }] = useMutation(INSERT_TEA_ITEM, {
-        refetchQueries: [{ query: GET_ALLLIST }]
+        refetchQueries: [{ query: GET_ALL_LIST }]
     });
     const [InsertJamItem, { data: JamDataIns, loading: JamLoadingIns, error: JamErrorIns }] = useMutation(INSERT_JAM_ITEM, {
-        refetchQueries: [{ query: GET_ALLLIST }]
+        refetchQueries: [{ query: GET_ALL_LIST }]
     });
     const [InsertMillsItem, { data: MillsDataIns, loading: MillsLoadingIns, error: MillsErrorIns }] = useMutation(INSERT_MILLS_ITEM, {
-        refetchQueries: [{ query: GET_ALLLIST }]
+        refetchQueries: [{ query: GET_ALL_LIST }]
     });
 
     useEffect(() => {
         if (CoffeeDataUpd || TeaDataUpd || JamDataUpd || MillsDataUpd) {
-            router.push("/admin");
+            router.push("/adminpanel");
             toast.success("Successfully update data in database");
         }
     }, [CoffeeDataUpd, JamDataUpd, MillsDataUpd, TeaDataUpd, router]);
 
     useEffect(() => {
         if (CoffeeDataDel || TeaDataDel || JamDataDel || MillsDataDel) {
-            router.push("/admin");
+            router.push("/adminpanel");
             toast.success("Successfully deleted data from database");
         }
     }, [CoffeeDataDel, JamDataDel, MillsDataDel, TeaDataDel, router]);
 
     useEffect(() => {
         if (CoffeeDataIns || TeaDataIns || JamDataIns || MillsDataIns) {
-            router.push("/admin");
+            router.push("/adminpanel");
             toast.success("Successfully add data to database");
         }
     }, [CoffeeDataIns, JamDataIns, MillsDataIns, TeaDataIns, router]);
@@ -194,6 +195,8 @@ const UpdateCard: React.FC<IUpdateCard> = ({ cardData, id }) => {
     if (CoffeeLoadingDel || TeaLoadingDel || JamLoadingDel || MillsLoadingDel) return <Spinner />;
     if (CoffeeLoadingIns || TeaLoadingIns || JamLoadingIns || MillsLoadingIns) return <Spinner />;
 
+    if (!cardData) return <ReturnLink />
+
     return (
         <Container sx={{ my: 2 }}>
             <RadioButtonsGroup onChange={onChange} />
@@ -208,7 +211,7 @@ const UpdateCard: React.FC<IUpdateCard> = ({ cardData, id }) => {
                                 Видалити
                             </Button>
                         }
-                        <Link href="/admin">
+                        <Link href="/adminpanel">
                             <Button sx={{ mx: 2, color: "#898989" }}>
                                 Відмінити
                             </Button>

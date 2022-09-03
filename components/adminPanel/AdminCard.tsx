@@ -5,7 +5,7 @@ import { Container, Typography, Box, Button } from "@mui/material";
 
 import CardText from "./cardItems/CardText";
 import CardOneLangBlock from "./cardItems/CardOneLangBlock";
-import { cloneId } from "../../store/adminSlice";
+
 import { ICard } from "../../types/cardType";
 
 interface IAdminCard {
@@ -17,7 +17,7 @@ const AdminCard: React.FC<IAdminCard> = ({ props }) => {
     const dispatch = useAppDispatch();
 
     const editorClick = () => {
-        router.push(`/admin/${props._id}`);
+        router.push(`/adminpanel/${props._id}`);
     };
 
     return (

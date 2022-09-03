@@ -10,7 +10,7 @@ import AdminMenu from "./AdminMenu";
 import Spinner from "../spinner/Spinner";
 import FindText from "./FindText";
 
-import { GET_ALLLIST, GET_ALLMENU } from "../../apollo/catalog";
+import { GET_ALL_LIST, GET_ALL_MENU } from "../../apollo/catalog";
 import { ICard } from "../../types/cardType";
 import { IMenu } from "../../types/menuType";
 import ButtonGroup from "./ButtonGroup";
@@ -18,8 +18,8 @@ import ButtonGroup from "./ButtonGroup";
 const AdminButtons: React.FC = () => {
     const [collection, setCollection] = useState('');
 
-    const { loading: cardLoading, error: cardError, data: cardData } = useQuery(GET_ALLLIST);
-    const { loading: menuLoading, error: menuError, data: menuData } = useQuery(GET_ALLMENU);
+    const { loading: cardLoading, error: cardError, data: cardData } = useQuery(GET_ALL_LIST);
+    const { loading: menuLoading, error: menuError, data: menuData } = useQuery(GET_ALL_MENU);
 
     useEffect(() => {
         if (cardError) {

@@ -9,7 +9,7 @@ import AboutBlock from "../components/aboutblock/AboutBlock";
 import Basket from "../components/basket/Basket";
 
 import client from '../apollo/client';
-import { GET_ALLLIST } from "../apollo/catalog";
+import { GET_ALL_LIST } from "../apollo/catalog";
 import { ICatalogList } from '../types/cardType';
 
 
@@ -49,7 +49,7 @@ export default Home;
 
 export const getServerSideProps: GetServerSideProps = async () => {
     const { data } = await client.query({
-        query: GET_ALLLIST,
+        query: GET_ALL_LIST,
         variables: {
             query1: { hide_ne: true },
             query2: { hide_ne: true },

@@ -5,7 +5,7 @@ import Accordeon from "../components/accordeon/Accordeon";
 import MenuTitle from "../components/menuTitle/MenuTitle";
 import ReturnButton from "../components/returnButton/ReturnButton";
 
-import { GET_ALLMENU } from "../apollo/catalog";
+import { GET_ALL_MENU } from "../apollo/catalog";
 import client from '../apollo/client';
 
 const MenuPage: React.FC = ({ menulist }: any) => {
@@ -27,7 +27,7 @@ export default MenuPage;
 
 export const getServerSideProps: GetServerSideProps = async () => {
     const { data } = await client.query({
-        query: GET_ALLMENU,
+        query: GET_ALL_MENU,
         variables: {
             query: { hide_ne: true }
         },

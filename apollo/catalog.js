@@ -1,6 +1,6 @@
 import { gql } from "@apollo/client";
 
-export const GET_ALLLIST = gql `
+export const GET_ALL_LIST = gql `
     query GetAllList(
         $query1: Coffeelist_multilangQueryInput
         $query2: Tealist_multilangQueryInput
@@ -83,7 +83,7 @@ export const GET_ALLLIST = gql `
     }
 `;
 
-export const GET_ALLMENU = gql `
+export const GET_ALL_MENU = gql `
     query GetAllMenu($query: Menu_multi_newQueryInput) {
         menu_multi_news(query: $query) {
             _id

@@ -39,3 +39,13 @@ export const INSERT_MILLS_ITEM = gql `
         }
     }
 `;
+
+export const INSERT_MENU_ITEM = gql `
+    mutation InsertMillsItem(
+        $insert: Menu_multi_newInsertInput!
+    ) {
+        insertOneMenu_multi_new(data: $insert) {
+            _id
+        }
+    }
+`;

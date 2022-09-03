@@ -1,8 +1,8 @@
-import { useState } from "react";
-import { useAppDispatch } from "../../../store/hook";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
+import { useMutation } from '@apollo/client';
 import { toast } from "react-toastify";
 
 import { Container, Box, Button } from "@mui/material";
@@ -12,6 +12,14 @@ import RadioButtonInput from "../inputs/RadioButtonInput";
 import MenuItemLang from "./MenuItemLang";
 import MenuAddNewItem from "./MenuAddNewItem";
 import { MenuData } from "../formData/MenuData";
+import RadioButtonsGroup from "../updateCard/RadioButtonsGroup";
+import ReturnLink from "../updateCard/ReturnLink";
+import Spinner from "../../spinner/Spinner";
+
+import { GET_ALL_LIST } from "../../../apollo/catalog";
+import { UPDATE_MENU_ITEM } from "../../../apollo/updateItem";
+import { DELETE_MENU_ITEM } from "../../../apollo/deleteItem";
+import { INSERT_MENU_ITEM } from "../../../apollo/insertItem"
 
 import { IMenu } from "../../../types/menuType";
 
@@ -25,46 +33,76 @@ interface IUpdateMenu {
 }
 
 const UpdateMenu: React.FC<IUpdateMenu> = ({ cardData, id }) => {
-    const [add, setAdd] = useState(false);
+    const [addItem, setAddItem] = useState(false);
+    const [addGroup, setAddGroup] = useState(false);
     const { handleSubmit, register } = useForm();
     const router = useRouter();
-    const dispatch = useAppDispatch();
+
+    const [UpdateMenuItem, { data: MenuDataUpd, loading: MenuLoadingUpd, error: MenuErrorUpd }] = useMutation(UPDATE_MENU_ITEM, {
+        refetchQueries: [{ query: GET_ALL_LIST }]
+    });
+    const [DeleteMenuItem, { data: MenuDataDel, loading: MenuLoadingDel, error: MenuErrorDel }] = useMutation(DELETE_MENU_ITEM, {
+        refetchQueries: [{ query: GET_ALL_LIST }]
+    });
+    const [InsertMenuItem, { data: MenuDataIns, loading: MenuLoadingIns, error: MenuErrorIns }] = useMutation(INSERT_MENU_ITEM, {
+        refetchQueries: [{ query: GET_ALL_LIST }]
+    });
+
+    useEffect(() => {
+        if (MenuDataUpd || MenuDataDel || MenuDataIns) {
+            router.push("/adminpanel");
+        }
+        MenuDataUpd && toast.success("Successfully update data in database");
+        MenuDataDel && toast.success("Successfully deleted data from database");
+        MenuDataIns && toast.success("Successfully add data to database");
+
+    }, [MenuDataDel, MenuDataIns, MenuDataUpd, router]);
+
+    useEffect(() => {
+        if (MenuErrorUpd) {
+            console.warn(MenuErrorUpd.message);
+            toast.error(MenuErrorUpd.message);
+        } else if (MenuErrorDel) {
+            console.warn(MenuErrorDel.message);
+            toast.error(MenuErrorDel.message);
+        } else if (MenuErrorIns) {
+            console.warn(MenuErrorIns.message);
+            toast.error(MenuErrorIns.message);
+        }
+    }, [MenuErrorDel, MenuErrorIns, MenuErrorUpd])
 
     const onSubmit = (data: IFormData) => {
         const newData = MenuData(data);
-        console.log(newData);
-        // updateData(newData, id, collection)
-        //     .then((data) => {
-        //         if (data.matchedCount) {
-        //             dispatch(updateMenuItem({ data: newData, id }));
-        //             router.push("/admin");
-        //             toast.success("Successfully update data in database");
-        //         } else toast.error("Can't update position in database");
-        //     })
-        //     .catch(function (error) {
-        //         console.warn(error.message);
-        //         toast.error("Can't update position in database");
-        //     });
+        // console.log(newData);
+        const edit = {
+            query: { _id: id },
+            set: newData
+        }
+        const ins = {
+            insert: newData
+        }
+        addGroup ? InsertMenuItem({ variables: ins }) : UpdateMenuItem({ variables: edit })
     };
 
     const onDelete = () => {
         console.log("Видалити: ", id);
-        // deleteData(id, collection)
-        //     .then((data) => {
-        //         if (data.deletedCount) {
-        //             dispatch(deleteMenuItem(id));
-        //             router.push("/admin");
-        //             toast.success("Successfully deleted data from database");
-        //         } else toast.error("Can't deleted data from database");
-        //     })
-        //     .catch(function (error) {
-        //         console.warn(error.message);
-        //         toast.error("Can't deleted data from database");
-        //     });
+        const variables = {
+            delete: { _id: id }
+        }
+        DeleteMenuItem({ variables })
     };
+
+    const onChange = (data: string) => {        
+        if (data === 'add') setAddGroup(true)
+        else setAddGroup(false)
+    }
+
+    if (MenuLoadingUpd || MenuLoadingDel || MenuLoadingIns) return <Spinner />;
+    if (!cardData) return <ReturnLink />
 
     return (
         <Container sx={{ my: 2 }}>
+            <RadioButtonsGroup onChange={onChange} />
             {cardData &&
                 <Box onSubmit={handleSubmit(onSubmit)} component="form">
                     <TextInput
@@ -94,38 +132,40 @@ const UpdateMenu: React.FC<IUpdateMenu> = ({ cardData, id }) => {
                     <MenuItemLang cardData={cardData} register={register} k={8} />
                     <MenuItemLang cardData={cardData} register={register} k={9} />
 
-                    {add && <MenuAddNewItem register={register} k={99} />}
-                    <Button
-                        onClick={() => setAdd(!add)}
-                        sx={{ display: "block", margin: "20px auto" }}
-                    >
-                        {add ? "Приховати нову позицію" : "Додати нову позицію"}
-                    </Button>
+                    {addItem && <MenuAddNewItem register={register} k={99} />}
+                    {!addGroup &&
+                        <Button
+                            onClick={() => setAddItem(!addItem)}
+                            sx={{ display: "block", margin: "20px auto" }}
+                        >
+                            {addItem ? "Приховати нову позицію" : "Додати нову позицію"}
+                        </Button>
+                    }
 
-                    <>
-                        <TextInput
-                            label={"Позиція:"}
-                            value={cardData?.position}
-                            reg={register("position")}
-                        />
-                        <RadioButtonInput
-                            label={"Приховати картку:"}
-                            value={cardData?.hide}
-                            reg={register("hide")}
-                        />
-                    </>
+                    <TextInput
+                        label={"Позиція:"}
+                        value={cardData?.position}
+                        reg={register("position")}
+                    />
+                    <RadioButtonInput
+                        label={"Приховати картку:"}
+                        value={cardData?.hide}
+                        reg={register("hide")}
+                    />
 
                     <Box sx={{ textAlign: "center", mb: 4 }}>
-                        <Button color="error" sx={{ mx: 2 }} onClick={onDelete}>
-                            Видалити
-                        </Button>
-                        <Link href="/admin">
+                        {!addGroup &&
+                            <Button color="error" sx={{ mx: 2 }} onClick={onDelete}>
+                                Видалити
+                            </Button>
+                        }
+                        <Link href="/adminpanel">
                             <Button sx={{ mx: 2, color: "#898989" }}>
                                 Відмінити
                             </Button>
                         </Link>
                         <Button type="submit" sx={{ mx: 2 }}>
-                            Підтвердити
+                            {addGroup ? "Додати нову картку" : "Підтвердити"}
                         </Button>
                     </Box>
                 </Box>
