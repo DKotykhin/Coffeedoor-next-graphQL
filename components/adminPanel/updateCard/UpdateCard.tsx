@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
@@ -10,9 +10,13 @@ import { Container, Box, Button } from "@mui/material";
 import Spinner from "../../spinner/Spinner";
 import CardForm from "../cardItems/CardForm";
 import { CardData } from "../formData/CardData";
+import RadioButtonsGroup from "./RadioButtonsGroup";
+
 import { UPDATE_COFFEE_ITEM, UPDATE_TEA_ITEM, UPDATE_JAM_ITEM, UPDATE_MILLS_ITEM } from "../../../apollo/updateItem";
 import { DELETE_COFFEE_ITEM, DELETE_TEA_ITEM, DELETE_JAM_ITEM, DELETE_MILLS_ITEM } from "../../../apollo/deleteItem";
+import { INSERT_COFFEE_ITEM, INSERT_TEA_ITEM, INSERT_JAM_ITEM, INSERT_MILLS_ITEM } from "../../../apollo/insertItem"
 import { GET_ALLLIST } from "../../../apollo/catalog";
+
 import { ICard, INewCardData } from "../../../types/cardType";
 
 interface IUpdateCard {
@@ -25,19 +29,20 @@ interface IFormData {
 }
 
 const UpdateCard: React.FC<IUpdateCard> = ({ cardData, id }) => {
+    const [add, setAdd] = useState(false);
     const { handleSubmit, register } = useForm();
     const router = useRouter();
 
-    const [UpdateCoffeeItem, { data: CoffeeData, loading: CoffeeLoading, error: CoffeeError }] = useMutation(UPDATE_COFFEE_ITEM, {
+    const [UpdateCoffeeItem, { data: CoffeeDataUpd, loading: CoffeeLoadingUpd, error: CoffeeErrorUpd }] = useMutation(UPDATE_COFFEE_ITEM, {
         refetchQueries: [{ query: GET_ALLLIST }]
     });
-    const [UpdateTeaItem, { data: TeaData, loading: TeaLoading, error: TeaError }] = useMutation(UPDATE_TEA_ITEM, {
+    const [UpdateTeaItem, { data: TeaDataUpd, loading: TeaLoadingUpd, error: TeaErrorUpd }] = useMutation(UPDATE_TEA_ITEM, {
         refetchQueries: [{ query: GET_ALLLIST }]
     });
-    const [UpdateJamItem, { data: JamData, loading: JamLoading, error: JamError }] = useMutation(UPDATE_JAM_ITEM, {
+    const [UpdateJamItem, { data: JamDataUpd, loading: JamLoadingUpd, error: JamErrorUpd }] = useMutation(UPDATE_JAM_ITEM, {
         refetchQueries: [{ query: GET_ALLLIST }]
     });
-    const [UpdateMillsItem, { data: MillsData, loading: MillsLoading, error: MillsError }] = useMutation(UPDATE_MILLS_ITEM, {
+    const [UpdateMillsItem, { data: MillsDataUpd, loading: MillsLoadingUpd, error: MillsErrorUpd }] = useMutation(UPDATE_MILLS_ITEM, {
         refetchQueries: [{ query: GET_ALLLIST }]
     });
 
@@ -54,37 +59,55 @@ const UpdateCard: React.FC<IUpdateCard> = ({ cardData, id }) => {
         refetchQueries: [{ query: GET_ALLLIST }]
     });
 
+    const [InsertCoffeeItem, { data: CoffeeDataIns, loading: CoffeeLoadingIns, error: CoffeeErrorIns }] = useMutation(INSERT_COFFEE_ITEM, {
+        refetchQueries: [{ query: GET_ALLLIST }]
+    });
+    const [InsertTeaItem, { data: TeaDataIns, loading: TeaLoadingIns, error: TeaErrorIns }] = useMutation(INSERT_TEA_ITEM, {
+        refetchQueries: [{ query: GET_ALLLIST }]
+    });
+    const [InsertJamItem, { data: JamDataIns, loading: JamLoadingIns, error: JamErrorIns }] = useMutation(INSERT_JAM_ITEM, {
+        refetchQueries: [{ query: GET_ALLLIST }]
+    });
+    const [InsertMillsItem, { data: MillsDataIns, loading: MillsLoadingIns, error: MillsErrorIns }] = useMutation(INSERT_MILLS_ITEM, {
+        refetchQueries: [{ query: GET_ALLLIST }]
+    });
+
     useEffect(() => {
-        if (CoffeeData || TeaData || JamData || MillsData) {
-            // console.log(CoffeeData);
+        if (CoffeeDataUpd || TeaDataUpd || JamDataUpd || MillsDataUpd) {
             router.push("/admin");
             toast.success("Successfully update data in database");
         }
-    }, [CoffeeData, JamData, MillsData, TeaData, router]);
+    }, [CoffeeDataUpd, JamDataUpd, MillsDataUpd, TeaDataUpd, router]);
 
     useEffect(() => {
         if (CoffeeDataDel || TeaDataDel || JamDataDel || MillsDataDel) {
-            // console.log(CoffeeDataDel);
             router.push("/admin");
             toast.success("Successfully deleted data from database");
         }
     }, [CoffeeDataDel, JamDataDel, MillsDataDel, TeaDataDel, router]);
 
     useEffect(() => {
-        if (CoffeeError) {
-            console.warn(CoffeeError.message);
-            toast.error(CoffeeError.message);
-        } else if (TeaError) {
-            console.warn(TeaError.message);
-            toast.error(TeaError.message);
-        } else if (JamError) {
-            console.warn(JamError.message);
-            toast.error(JamError.message);
-        } else if (MillsError) {
-            console.warn(MillsError.message);
-            toast.error(MillsError.message);
+        if (CoffeeDataIns || TeaDataIns || JamDataIns || MillsDataIns) {
+            router.push("/admin");
+            toast.success("Successfully add data to database");
         }
-    }, [CoffeeError, JamError, MillsError, TeaError])
+    }, [CoffeeDataIns, JamDataIns, MillsDataIns, TeaDataIns, router]);
+
+    useEffect(() => {
+        if (CoffeeErrorUpd) {
+            console.warn(CoffeeErrorUpd.message);
+            toast.error(CoffeeErrorUpd.message);
+        } else if (TeaErrorUpd) {
+            console.warn(TeaErrorUpd.message);
+            toast.error(TeaErrorUpd.message);
+        } else if (JamErrorUpd) {
+            console.warn(JamErrorUpd.message);
+            toast.error(JamErrorUpd.message);
+        } else if (MillsErrorUpd) {
+            console.warn(MillsErrorUpd.message);
+            toast.error(MillsErrorUpd.message);
+        }
+    }, [CoffeeErrorUpd, JamErrorUpd, MillsErrorUpd, TeaErrorUpd])
 
     useEffect(() => {
         if (CoffeeErrorDel) {
@@ -100,26 +123,45 @@ const UpdateCard: React.FC<IUpdateCard> = ({ cardData, id }) => {
             console.warn(MillsErrorDel.message);
             toast.error(MillsErrorDel.message);
         }
-    }, [CoffeeErrorDel, JamErrorDel, MillsErrorDel, TeaErrorDel])
+    }, [CoffeeErrorDel, JamErrorDel, MillsErrorDel, TeaErrorDel]);
+
+    useEffect(() => {
+        if (CoffeeErrorIns) {
+            console.warn(CoffeeErrorIns.message);
+            toast.error(CoffeeErrorIns.message);
+        } else if (TeaErrorIns) {
+            console.warn(TeaErrorIns.message);
+            toast.error(TeaErrorIns.message);
+        } else if (JamErrorIns) {
+            console.warn(JamErrorIns.message);
+            toast.error(JamErrorIns.message);
+        } else if (MillsErrorIns) {
+            console.warn(MillsErrorIns.message);
+            toast.error(MillsErrorIns.message);
+        }
+    }, [CoffeeErrorIns, JamErrorIns, MillsErrorIns, TeaErrorIns])
 
     const onSubmit = (data: IFormData) => {
         const newData: INewCardData = CardData(data);
-        const variables = {
+        // console.log(newData);        
+        const edit = {
             query: { _id: id },
             set: newData
         }
-        // console.log(newData);        
+        const ins = {            
+            insert: newData
+        }
         if (cardData.__typename === "Coffeelist_multilang") {
-            UpdateCoffeeItem({ variables })
+            add ? InsertCoffeeItem({ variables: ins }) : UpdateCoffeeItem({ variables: edit })
         };
         if (cardData.__typename === "Tealist_multilang") {
-            UpdateTeaItem({ variables })
+            add ? InsertTeaItem({ variables: ins }) : UpdateTeaItem({ variables: edit })
         };
         if (cardData.__typename === "Jamlist_multilang") {
-            UpdateJamItem({ variables })
+            add ? InsertJamItem({ variables: ins }) : UpdateJamItem({ variables: edit })
         };
         if (cardData.__typename === "Millslist_multilang") {
-            UpdateMillsItem({ variables })
+            add ? InsertMillsItem({ variables: ins }) : UpdateMillsItem({ variables: edit })
         };
     };
 
@@ -142,26 +184,37 @@ const UpdateCard: React.FC<IUpdateCard> = ({ cardData, id }) => {
         };
     };
 
-    if (CoffeeLoading || TeaLoading || JamLoading || MillsLoading || CoffeeLoadingDel || TeaLoadingDel || JamLoadingDel || MillsLoadingDel) return <Spinner />;
+    const onChange = (data: string) => {
+        // console.log(data)
+        if (data === 'add') setAdd(true)
+        else setAdd(false)
+    }
+
+    if (CoffeeLoadingUpd || TeaLoadingUpd || JamLoadingUpd || MillsLoadingUpd) return <Spinner />;
+    if (CoffeeLoadingDel || TeaLoadingDel || JamLoadingDel || MillsLoadingDel) return <Spinner />;
+    if (CoffeeLoadingIns || TeaLoadingIns || JamLoadingIns || MillsLoadingIns) return <Spinner />;
 
     return (
         <Container sx={{ my: 2 }}>
+            <RadioButtonsGroup onChange={onChange} />
             {cardData &&
                 <Box onSubmit={handleSubmit(onSubmit)} component="form">
 
                     <CardForm cardData={cardData} register={register} />
 
                     <Box sx={{ textAlign: "center", mb: 4 }}>
-                        <Button color="error" sx={{ mx: 2 }} onClick={onDelete}>
-                            Видалити
-                        </Button>
+                        {!add &&
+                            <Button color="error" sx={{ mx: 2 }} onClick={onDelete}>
+                                Видалити
+                            </Button>
+                        }
                         <Link href="/admin">
                             <Button sx={{ mx: 2, color: "#898989" }}>
                                 Відмінити
                             </Button>
                         </Link>
                         <Button type="submit" sx={{ mx: 2 }}>
-                            Зберігти
+                            {add ? "Додати нову картку" : "Зберігти"}
                         </Button>
                     </Box>
                 </Box>

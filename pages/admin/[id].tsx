@@ -42,7 +42,7 @@ const IdPage: NextPage = () => {
         }
     }
 
-    if (cardLoading || menuLoading) return <Spinner />
+    if (cardLoading || menuLoading) return <Spinner />;
 
     return (
         <>
@@ -54,15 +54,16 @@ const IdPage: NextPage = () => {
                 Картка товара
             </Typography>
             {cardData ? (
-                <UpdateCard
-                    cardData={cardItem(cardData)}
-                    id={router.query.id}
-                />
-            ) : menuData ? (
-                <UpdateMenu
-                    cardData={menuData?.menu_multi_news[0]}
-                    id={router.query.id}
-                />
+                <>
+                    <UpdateCard
+                        cardData={cardItem(cardData)}
+                        id={router.query.id}
+                    />            
+                    <UpdateMenu
+                        cardData={menuData?.menu_multi_news[0]}
+                        id={router.query.id}
+                    />
+                </>
             ) : (
                 <>
                     <Typography sx={{ textAlign: 'center', mt: 5, fontSize: 22 }}>

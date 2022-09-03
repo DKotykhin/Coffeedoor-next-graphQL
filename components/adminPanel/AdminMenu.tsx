@@ -7,7 +7,6 @@ import CardText from "./cardItems/CardText";
 import MenuOneLangTitle from "./menuItems/MenuOneLangTitle";
 import MenuOneLangBody from "./menuItems/MenuOneLangBody";
 
-import { cloneId } from "../../store/adminSlice";
 import { IMenu } from "../../types/menuType";
 
 interface IMenuCard {
@@ -20,12 +19,6 @@ const AdminMenu: React.FC<IMenuCard> = ({ props }) => {
     
     const editorClick = () => {
         router.push(`/admin/${props._id}`);
-    };
-
-    const cloneClick = () => {
-        // console.log("clone: ", props._id);
-        dispatch(cloneId(props._id));
-        router.push("/admin/add");
     };
 
     return (
@@ -58,10 +51,7 @@ const AdminMenu: React.FC<IMenuCard> = ({ props }) => {
             )}
             <Button sx={{ m: 2 }} onClick={editorClick}>
                 Редагувати
-            </Button>
-            <Button sx={{ m: 2 }} onClick={cloneClick} color="secondary">
-                Клонувати
-            </Button>
+            </Button>           
         </Container>
     );
 };

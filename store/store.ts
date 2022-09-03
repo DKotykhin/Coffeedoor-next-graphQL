@@ -1,10 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit';
 
 import basket from './basketSlice';
-import collection from './adminSlice'
 
 const store = configureStore({
-    reducer: { basket, collection },
+    reducer: { basket },
     devTools: process.env.NODE_ENV !== 'production'
 });
 

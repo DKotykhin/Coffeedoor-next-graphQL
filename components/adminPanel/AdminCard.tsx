@@ -20,12 +20,6 @@ const AdminCard: React.FC<IAdminCard> = ({ props }) => {
         router.push(`/admin/${props._id}`);
     };
 
-    const cloneClick = () => {
-        // console.log("clone: ", props._id);
-        dispatch(cloneId(props._id));
-        router.push("/admin/add");
-    };
-
     return (
         <Container sx={{ my: 2, border: "solid 2px #898989", borderRadius: 5 }}>
             {props.body.map((item, i) => (
@@ -62,9 +56,6 @@ const AdminCard: React.FC<IAdminCard> = ({ props }) => {
             />
             <Button sx={{ m: 2 }} onClick={editorClick}>
                 Редагувати
-            </Button>
-            <Button sx={{ m: 2 }} onClick={cloneClick} color="secondary">
-                Клонувати
             </Button>
         </Container>
     );
