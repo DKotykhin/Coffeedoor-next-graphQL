@@ -11,8 +11,8 @@ import MuiAccordionSummary, {
 import MuiAccordionDetails from "@mui/material/AccordionDetails";
 import ExpandMoreIcon from "@mui/icons-material/ExpandCircleDown";
 
-import { IBody, IMenu } from "../../types/menuType";
 import AccordeonItem from "./AccordeonItem";
+import { IBody, IMenuList } from "../../types/menuType";
 
 import styles from "./Accordeon.module.scss";
 
@@ -52,13 +52,8 @@ const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
     borderTop: "1px solid rgba(0, 0, 0, .125)",
 }));
 
-interface IAccordeon {
-    menulist: {
-        menu_multi_news: IMenu[]
-    }
-}
 
-const Accordeon: React.FC<IAccordeon> = ({ menulist }) => {
+const Accordeon: React.FC<IMenuList> = ({ menulist }) => {
     const [expanded, setExpanded] = React.useState("");
     const router = useRouter();
 

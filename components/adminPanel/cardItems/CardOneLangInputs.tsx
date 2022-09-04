@@ -1,14 +1,16 @@
+import { FieldValues, UseFormRegister } from "react-hook-form";
+
 import { Box, Paper, Typography } from "@mui/material";
-import { IBody } from "../../../types/cardType";
 
 import TextInput from "../inputs/TextInput";
 import SortFieldInput from "../inputs/SortFieldInput";
 import TextFieldInput from "../inputs/TextFieldInput";
 
+import { IBody } from "../../../types/cardType";
 interface ICardLang {
     item: IBody;
     lang: string;
-    register: any
+    register: UseFormRegister<FieldValues>
 }
 
 const UpdateCardLang: React.FC<ICardLang> = ({ item, lang, register }) => {

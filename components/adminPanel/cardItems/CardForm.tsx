@@ -1,12 +1,15 @@
+import { FieldValues, UseFormRegister } from "react-hook-form";
+
 import CardOneLangInputs from "./CardOneLangInputs";
 import TextInput from "../inputs/TextInput";
 import TextFieldInput from "../inputs/TextFieldInput";
 import RadioButtonInput from "../inputs/RadioButtonInput";
+
 import { ICard } from "../../../types/cardType";
 
 interface ICardForm {
     cardData: ICard;
-    register: any
+    register: UseFormRegister<FieldValues>
 }
 
 const CardForm: React.FC<ICardForm> = ({ cardData, register }) => {

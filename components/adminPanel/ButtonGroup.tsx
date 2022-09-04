@@ -2,7 +2,7 @@ import { Box, Button } from "@mui/material";
 import { MouseEventHandler } from "react";
 
 interface IButtonGroup {
-    ListClick: any
+    ListClick: (arg0: string) => void
 }
 
 const ButtonGroup: React.FC<IButtonGroup> = ({ ListClick }) => {

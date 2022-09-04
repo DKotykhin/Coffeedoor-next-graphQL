@@ -1,11 +1,13 @@
+import { FieldValues, UseFormRegister } from "react-hook-form";
+
 import { Box, Paper } from "@mui/material";
-import { IBody, IMenu } from "../../../types/menuType";
+import { IBody } from "../../../types/menuType";
 
 import TextInput from "../inputs/TextInput";
 
 interface IMenuItem {
     item: IBody;
-    register: any;
+    register: UseFormRegister<FieldValues>;
     j: number;
     k: number
 }

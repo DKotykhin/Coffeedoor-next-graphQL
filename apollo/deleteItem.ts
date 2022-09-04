@@ -1,6 +1,6 @@
-import { gql } from "@apollo/client";
+import { DocumentNode, gql } from "@apollo/client";
 
-export const DELETE_COFFEE_ITEM = gql `
+export const DELETE_COFFEE_ITEM: DocumentNode = gql `
     mutation DeleteCoffeeList(
         $delete: Coffeelist_multilangQueryInput!
     ) {
@@ -10,7 +10,7 @@ export const DELETE_COFFEE_ITEM = gql `
     }
 `;
 
-export const DELETE_TEA_ITEM = gql `
+export const DELETE_TEA_ITEM: DocumentNode = gql `
     mutation DeleteTeaList(
         $delete: Tealist_multilangQueryInput!
     ) {
@@ -20,7 +20,7 @@ export const DELETE_TEA_ITEM = gql `
     }
 `;
 
-export const DELETE_JAM_ITEM = gql `
+export const DELETE_JAM_ITEM: DocumentNode = gql `
     mutation DeleteJamList(
         $delete: Jamlist_multilangQueryInput!
     ) {
@@ -30,7 +30,7 @@ export const DELETE_JAM_ITEM = gql `
     }
 `;
 
-export const DELETE_MILLS_ITEM = gql `
+export const DELETE_MILLS_ITEM: DocumentNode = gql `
     mutation DeleteMillsList(
         $delete: Millslist_multilangQueryInput!
     ) {
@@ -40,7 +40,7 @@ export const DELETE_MILLS_ITEM = gql `
     }
 `;
 
-export const DELETE_MENU_ITEM = gql `
+export const DELETE_MENU_ITEM: DocumentNode = gql `
     mutation DeleteMenuItem(
         $delete: Menu_multi_newQueryInput!
     ) {

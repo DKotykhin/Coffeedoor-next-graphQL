@@ -16,7 +16,7 @@ import RadioButtonsGroup from "../updateCard/RadioButtonsGroup";
 import ReturnLink from "../updateCard/ReturnLink";
 import Spinner from "../../spinner/Spinner";
 
-import { GET_ALL_LIST } from "../../../apollo/catalog";
+import { GET_ALL_LIST } from "../../../apollo/getCatalog";
 import { UPDATE_MENU_ITEM } from "../../../apollo/updateItem";
 import { DELETE_MENU_ITEM } from "../../../apollo/deleteItem";
 import { INSERT_MENU_ITEM } from "../../../apollo/insertItem"
@@ -29,7 +29,7 @@ interface IFormData {
 
 interface IUpdateMenu {
     cardData: IMenu,
-    id: any
+    id: string | string[] | undefined
 }
 
 const UpdateMenu: React.FC<IUpdateMenu> = ({ cardData, id }) => {

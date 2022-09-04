@@ -1,18 +1,16 @@
 export interface ICatalogList {
-    cataloglist: {
-        coffeelist_multilangs: ICard[];
-        jamlist_multilangs: ICard[];
-        tealist_multilangs: ICard[];
-        millslist_multilangs: ICard[];
-    }
+    coffeelist_multilangs: ICard[];
+    jamlist_multilangs: ICard[];
+    tealist_multilangs: ICard[];
+    millslist_multilangs: ICard[];
 }
 
 export interface ICard extends INewCardData {
     _id: string;
-    __typename: string    
+    __typename: string;
 }
 
-export interface INewCardData {      
+export interface INewCardData {
     body: IBody[];
     card_img: string;
     list_img: string[];

@@ -3,7 +3,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
-import { useMutation } from '@apollo/client';
+import { DocumentNode, useMutation } from '@apollo/client';
 
 import { Container, Box, Button } from "@mui/material";
 
@@ -16,131 +16,73 @@ import ReturnLink from "./ReturnLink";
 import { UPDATE_COFFEE_ITEM, UPDATE_TEA_ITEM, UPDATE_JAM_ITEM, UPDATE_MILLS_ITEM } from "../../../apollo/updateItem";
 import { DELETE_COFFEE_ITEM, DELETE_TEA_ITEM, DELETE_JAM_ITEM, DELETE_MILLS_ITEM } from "../../../apollo/deleteItem";
 import { INSERT_COFFEE_ITEM, INSERT_TEA_ITEM, INSERT_JAM_ITEM, INSERT_MILLS_ITEM } from "../../../apollo/insertItem"
-import { GET_ALL_LIST } from "../../../apollo/catalog";
+import { GET_ALL_LIST } from "../../../apollo/getCatalog";
 
 import { ICard, INewCardData } from "../../../types/cardType";
 
 interface IUpdateCard {
     cardData: ICard;
-    id: any
+    id: string | string[] | undefined
 }
 
 interface IFormData {
     [key: string]: string
 }
+let QUERY_UPD: DocumentNode, QUERY_DEL: DocumentNode, QUERY_INS: DocumentNode;
 
 const UpdateCard: React.FC<IUpdateCard> = ({ cardData, id }) => {
     const [add, setAdd] = useState(false);
     const { handleSubmit, register } = useForm();
     const router = useRouter();
 
-    const [UpdateCoffeeItem, { data: CoffeeDataUpd, loading: CoffeeLoadingUpd, error: CoffeeErrorUpd }] = useMutation(UPDATE_COFFEE_ITEM, {
+    if (cardData.__typename === "Coffeelist_multilang") {
+        QUERY_UPD = UPDATE_COFFEE_ITEM;
+        QUERY_DEL = DELETE_COFFEE_ITEM;
+        QUERY_INS = INSERT_COFFEE_ITEM;
+    } else if (cardData.__typename === "Tealist_multilang") {
+        QUERY_UPD = UPDATE_TEA_ITEM;
+        QUERY_DEL = DELETE_TEA_ITEM;
+        QUERY_INS = INSERT_TEA_ITEM;
+    } else if (cardData.__typename === "Jamlist_multilang") {
+        QUERY_UPD = UPDATE_JAM_ITEM;
+        QUERY_DEL = DELETE_JAM_ITEM;
+        QUERY_INS = INSERT_JAM_ITEM;
+    } else if (cardData.__typename === "Millslist_multilang") {
+        QUERY_UPD = UPDATE_MILLS_ITEM;
+        QUERY_DEL = DELETE_MILLS_ITEM;
+        QUERY_INS = INSERT_MILLS_ITEM;
+    }
+    const [UpdateItem, { data: DataUpd, loading: LoadingUpd, error: ErrorUpd }] = useMutation(QUERY_UPD, {
         refetchQueries: [{ query: GET_ALL_LIST }]
     });
-    const [UpdateTeaItem, { data: TeaDataUpd, loading: TeaLoadingUpd, error: TeaErrorUpd }] = useMutation(UPDATE_TEA_ITEM, {
+    const [DeleteItem, { data: DataDel, loading: LoadingDel, error: ErrorDel }] = useMutation(QUERY_DEL, {
         refetchQueries: [{ query: GET_ALL_LIST }]
     });
-    const [UpdateJamItem, { data: JamDataUpd, loading: JamLoadingUpd, error: JamErrorUpd }] = useMutation(UPDATE_JAM_ITEM, {
-        refetchQueries: [{ query: GET_ALL_LIST }]
-    });
-    const [UpdateMillsItem, { data: MillsDataUpd, loading: MillsLoadingUpd, error: MillsErrorUpd }] = useMutation(UPDATE_MILLS_ITEM, {
-        refetchQueries: [{ query: GET_ALL_LIST }]
-    });
-
-    const [DeleteCoffeeItem, { data: CoffeeDataDel, loading: CoffeeLoadingDel, error: CoffeeErrorDel }] = useMutation(DELETE_COFFEE_ITEM, {
-        refetchQueries: [{ query: GET_ALL_LIST }]
-    });
-    const [DeleteTeaItem, { data: TeaDataDel, loading: TeaLoadingDel, error: TeaErrorDel }] = useMutation(DELETE_TEA_ITEM, {
-        refetchQueries: [{ query: GET_ALL_LIST }]
-    });
-    const [DeleteJamItem, { data: JamDataDel, loading: JamLoadingDel, error: JamErrorDel }] = useMutation(DELETE_JAM_ITEM, {
-        refetchQueries: [{ query: GET_ALL_LIST }]
-    });
-    const [DeleteMillsItem, { data: MillsDataDel, loading: MillsLoadingDel, error: MillsErrorDel }] = useMutation(DELETE_MILLS_ITEM, {
-        refetchQueries: [{ query: GET_ALL_LIST }]
-    });
-
-    const [InsertCoffeeItem, { data: CoffeeDataIns, loading: CoffeeLoadingIns, error: CoffeeErrorIns }] = useMutation(INSERT_COFFEE_ITEM, {
-        refetchQueries: [{ query: GET_ALL_LIST }]
-    });
-    const [InsertTeaItem, { data: TeaDataIns, loading: TeaLoadingIns, error: TeaErrorIns }] = useMutation(INSERT_TEA_ITEM, {
-        refetchQueries: [{ query: GET_ALL_LIST }]
-    });
-    const [InsertJamItem, { data: JamDataIns, loading: JamLoadingIns, error: JamErrorIns }] = useMutation(INSERT_JAM_ITEM, {
-        refetchQueries: [{ query: GET_ALL_LIST }]
-    });
-    const [InsertMillsItem, { data: MillsDataIns, loading: MillsLoadingIns, error: MillsErrorIns }] = useMutation(INSERT_MILLS_ITEM, {
+    const [InsertItem, { data: DataIns, loading: LoadingIns, error: ErrorIns }] = useMutation(QUERY_INS, {
         refetchQueries: [{ query: GET_ALL_LIST }]
     });
 
     useEffect(() => {
-        if (CoffeeDataUpd || TeaDataUpd || JamDataUpd || MillsDataUpd) {
+        if (DataUpd || DataDel || DataIns) {
             router.push("/adminpanel");
-            toast.success("Successfully update data in database");
         }
-    }, [CoffeeDataUpd, JamDataUpd, MillsDataUpd, TeaDataUpd, router]);
+        DataUpd && toast.success("Successfully update data in database");
+        DataDel && toast.success("Successfully deleted data from database");
+        DataIns && toast.success("Successfully add data to database");
+    }, [DataUpd, DataDel, DataIns, router]);
 
     useEffect(() => {
-        if (CoffeeDataDel || TeaDataDel || JamDataDel || MillsDataDel) {
-            router.push("/adminpanel");
-            toast.success("Successfully deleted data from database");
+        if (ErrorUpd) {
+            console.warn(ErrorUpd.message);
+            toast.error(ErrorUpd.message);
+        } else if (ErrorDel) {
+            console.warn(ErrorDel.message);
+            toast.error(ErrorDel.message);
+        } else if (ErrorIns) {
+            console.warn(ErrorIns.message);
+            toast.error(ErrorIns.message);
         }
-    }, [CoffeeDataDel, JamDataDel, MillsDataDel, TeaDataDel, router]);
-
-    useEffect(() => {
-        if (CoffeeDataIns || TeaDataIns || JamDataIns || MillsDataIns) {
-            router.push("/adminpanel");
-            toast.success("Successfully add data to database");
-        }
-    }, [CoffeeDataIns, JamDataIns, MillsDataIns, TeaDataIns, router]);
-
-    useEffect(() => {
-        if (CoffeeErrorUpd) {
-            console.warn(CoffeeErrorUpd.message);
-            toast.error(CoffeeErrorUpd.message);
-        } else if (TeaErrorUpd) {
-            console.warn(TeaErrorUpd.message);
-            toast.error(TeaErrorUpd.message);
-        } else if (JamErrorUpd) {
-            console.warn(JamErrorUpd.message);
-            toast.error(JamErrorUpd.message);
-        } else if (MillsErrorUpd) {
-            console.warn(MillsErrorUpd.message);
-            toast.error(MillsErrorUpd.message);
-        }
-    }, [CoffeeErrorUpd, JamErrorUpd, MillsErrorUpd, TeaErrorUpd])
-
-    useEffect(() => {
-        if (CoffeeErrorDel) {
-            console.warn(CoffeeErrorDel.message);
-            toast.error(CoffeeErrorDel.message);
-        } else if (TeaErrorDel) {
-            console.warn(TeaErrorDel.message);
-            toast.error(TeaErrorDel.message);
-        } else if (JamErrorDel) {
-            console.warn(JamErrorDel.message);
-            toast.error(JamErrorDel.message);
-        } else if (MillsErrorDel) {
-            console.warn(MillsErrorDel.message);
-            toast.error(MillsErrorDel.message);
-        }
-    }, [CoffeeErrorDel, JamErrorDel, MillsErrorDel, TeaErrorDel]);
-
-    useEffect(() => {
-        if (CoffeeErrorIns) {
-            console.warn(CoffeeErrorIns.message);
-            toast.error(CoffeeErrorIns.message);
-        } else if (TeaErrorIns) {
-            console.warn(TeaErrorIns.message);
-            toast.error(TeaErrorIns.message);
-        } else if (JamErrorIns) {
-            console.warn(JamErrorIns.message);
-            toast.error(JamErrorIns.message);
-        } else if (MillsErrorIns) {
-            console.warn(MillsErrorIns.message);
-            toast.error(MillsErrorIns.message);
-        }
-    }, [CoffeeErrorIns, JamErrorIns, MillsErrorIns, TeaErrorIns])
+    }, [ErrorUpd, ErrorDel, ErrorIns]);
 
     const onSubmit = (data: IFormData) => {
         const newData: INewCardData = CardData(data);
@@ -149,21 +91,10 @@ const UpdateCard: React.FC<IUpdateCard> = ({ cardData, id }) => {
             query: { _id: id },
             set: newData
         }
-        const ins = {            
+        const ins = {
             insert: newData
         }
-        if (cardData.__typename === "Coffeelist_multilang") {
-            add ? InsertCoffeeItem({ variables: ins }) : UpdateCoffeeItem({ variables: edit })
-        };
-        if (cardData.__typename === "Tealist_multilang") {
-            add ? InsertTeaItem({ variables: ins }) : UpdateTeaItem({ variables: edit })
-        };
-        if (cardData.__typename === "Jamlist_multilang") {
-            add ? InsertJamItem({ variables: ins }) : UpdateJamItem({ variables: edit })
-        };
-        if (cardData.__typename === "Millslist_multilang") {
-            add ? InsertMillsItem({ variables: ins }) : UpdateMillsItem({ variables: edit })
-        };
+        add ? InsertItem({ variables: ins }) : UpdateItem({ variables: edit })
     };
 
     const onDelete = () => {
@@ -171,18 +102,7 @@ const UpdateCard: React.FC<IUpdateCard> = ({ cardData, id }) => {
         const variables = {
             delete: { _id: id }
         }
-        if (cardData.__typename === "Coffeelist_multilang") {
-            DeleteCoffeeItem({ variables })
-        };
-        if (cardData.__typename === "Tealist_multilang") {
-            DeleteTeaItem({ variables })
-        };
-        if (cardData.__typename === "Jamlist_multilang") {
-            DeleteJamItem({ variables })
-        };
-        if (cardData.__typename === "Millslist_multilang") {
-            DeleteMillsItem({ variables })
-        };
+        DeleteItem({ variables })
     };
 
     const onChange = (data: string) => {
@@ -191,20 +111,15 @@ const UpdateCard: React.FC<IUpdateCard> = ({ cardData, id }) => {
         else setAdd(false)
     }
 
-    if (CoffeeLoadingUpd || TeaLoadingUpd || JamLoadingUpd || MillsLoadingUpd) return <Spinner />;
-    if (CoffeeLoadingDel || TeaLoadingDel || JamLoadingDel || MillsLoadingDel) return <Spinner />;
-    if (CoffeeLoadingIns || TeaLoadingIns || JamLoadingIns || MillsLoadingIns) return <Spinner />;
-
-    if (!cardData) return <ReturnLink />
+    if (LoadingIns || LoadingDel || LoadingUpd) return <Spinner />;
+    if (!cardData) return <ReturnLink />;
 
     return (
         <Container sx={{ my: 2 }}>
             <RadioButtonsGroup onChange={onChange} />
             {cardData &&
                 <Box onSubmit={handleSubmit(onSubmit)} component="form">
-
                     <CardForm cardData={cardData} register={register} />
-
                     <Box sx={{ textAlign: "center", mb: 4 }}>
                         {!add &&
                             <Button color="error" sx={{ mx: 2 }} onClick={onDelete}>

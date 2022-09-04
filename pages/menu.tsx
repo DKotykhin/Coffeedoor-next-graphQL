@@ -5,11 +5,11 @@ import Accordeon from "../components/accordeon/Accordeon";
 import MenuTitle from "../components/menuTitle/MenuTitle";
 import ReturnButton from "../components/returnButton/ReturnButton";
 
-import { GET_ALL_MENU } from "../apollo/catalog";
+import { GET_ALL_MENU } from "../apollo/getCatalog";
 import client from '../apollo/client';
+import { IMenuList } from "../types/menuType";
 
-const MenuPage: React.FC = ({ menulist }: any) => {
-
+const MenuPage: React.FC<IMenuList> = ({ menulist }) => {
     return (
         <>
             <Head>

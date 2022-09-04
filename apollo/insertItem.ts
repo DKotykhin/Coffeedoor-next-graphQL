@@ -1,6 +1,6 @@
-import { gql } from "@apollo/client";
+import { DocumentNode, gql } from "@apollo/client";
 
-export const INSERT_COFFEE_ITEM = gql `
+export const INSERT_COFFEE_ITEM: DocumentNode = gql `
     mutation InsertCoffeeItem(
         $insert: Coffeelist_multilangInsertInput!
     ) {
@@ -10,7 +10,7 @@ export const INSERT_COFFEE_ITEM = gql `
     }
 `;
 
-export const INSERT_TEA_ITEM = gql `
+export const INSERT_TEA_ITEM: DocumentNode = gql `
     mutation InsertTeaItem(
         $insert: Tealist_multilangInsertInput!
     ) {
@@ -20,7 +20,7 @@ export const INSERT_TEA_ITEM = gql `
     }
 `;
 
-export const INSERT_JAM_ITEM = gql `
+export const INSERT_JAM_ITEM: DocumentNode = gql `
     mutation InsertJamItem(
         $insert: Jamlist_multilangInsertInput!
     ) {
@@ -30,7 +30,7 @@ export const INSERT_JAM_ITEM = gql `
     }
 `;
 
-export const INSERT_MILLS_ITEM = gql `
+export const INSERT_MILLS_ITEM: DocumentNode = gql `
     mutation InsertMillsItem(
         $insert: Millslist_multilangInsertInput!
     ) {
@@ -40,7 +40,7 @@ export const INSERT_MILLS_ITEM = gql `
     }
 `;
 
-export const INSERT_MENU_ITEM = gql `
+export const INSERT_MENU_ITEM: DocumentNode = gql `
     mutation InsertMillsItem(
         $insert: Menu_multi_newInsertInput!
     ) {

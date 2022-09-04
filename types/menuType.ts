@@ -1,3 +1,8 @@
+export interface IMenuList {
+    menulist: {
+        menu_multi_news: IMenu[];
+    }
+}
 
 export interface IMenu {
     _id: string;

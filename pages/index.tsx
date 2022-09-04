@@ -9,11 +9,14 @@ import AboutBlock from "../components/aboutblock/AboutBlock";
 import Basket from "../components/basket/Basket";
 
 import client from '../apollo/client';
-import { GET_ALL_LIST } from "../apollo/catalog";
+import { GET_ALL_LIST } from "../apollo/getCatalog";
 import { ICatalogList } from '../types/cardType';
 
+interface ICatalog {
+    cataloglist: ICatalogList
+}
 
-const Home: React.FC<ICatalogList> = ({ cataloglist }) => {
+const Home: React.FC<ICatalog> = ({ cataloglist }) => {
 
     return (
         <div>

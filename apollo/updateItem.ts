@@ -1,6 +1,6 @@
-import { gql } from "@apollo/client";
+import { DocumentNode, gql } from "@apollo/client";
 
-export const UPDATE_COFFEE_ITEM = gql `
+export const UPDATE_COFFEE_ITEM: DocumentNode = gql `
     mutation UpdateCoffeeList(
         $query: Coffeelist_multilangQueryInput
         $set: Coffeelist_multilangUpdateInput!
@@ -11,7 +11,7 @@ export const UPDATE_COFFEE_ITEM = gql `
     }
 `;
 
-export const UPDATE_TEA_ITEM = gql `
+export const UPDATE_TEA_ITEM: DocumentNode = gql `
     mutation UpdateTeaList(
         $query: Tealist_multilangQueryInput
         $set: Tealist_multilangUpdateInput!
@@ -22,7 +22,7 @@ export const UPDATE_TEA_ITEM = gql `
     }
 `;
 
-export const UPDATE_JAM_ITEM = gql `
+export const UPDATE_JAM_ITEM: DocumentNode = gql `
     mutation UpdateJamList(
         $query: Jamlist_multilangQueryInput
         $set: Jamlist_multilangUpdateInput!
@@ -33,7 +33,7 @@ export const UPDATE_JAM_ITEM = gql `
     }
 `;
 
-export const UPDATE_MILLS_ITEM = gql `
+export const UPDATE_MILLS_ITEM: DocumentNode = gql `
     mutation UpdateMillsList(
         $query: Millslist_multilangQueryInput
         $set: Millslist_multilangUpdateInput!
@@ -44,7 +44,7 @@ export const UPDATE_MILLS_ITEM = gql `
     }
 `;
 
-export const UPDATE_MENU_ITEM = gql `
+export const UPDATE_MENU_ITEM: DocumentNode = gql `
     mutation UpdateMenuItem(
         $query: Menu_multi_newQueryInput
         $set: Menu_multi_newUpdateInput!

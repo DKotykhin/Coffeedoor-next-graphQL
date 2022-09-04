@@ -9,7 +9,7 @@ import UpdateCard from "../../components/adminPanel/updateCard/UpdateCard";
 import UpdateMenu from "../../components/adminPanel/updateMenu/UpdateMenu";
 import Spinner from "../../components/spinner/Spinner";
 
-import { GET_ALL_LIST, GET_ALL_MENU } from "../../apollo/catalog";
+import { GET_ALL_LIST, GET_ALL_MENU } from "../../apollo/getCatalog";
 
 const IdPage: NextPage = () => {
     const router = useRouter();
@@ -52,6 +52,11 @@ const IdPage: NextPage = () => {
             <Typography variant="h4" sx={{ textAlign: "center", mt: 3 }}>
                 Картка товара
             </Typography>
+            {(cardError || menuError) &&
+                <Typography variant="h4" sx={{ textAlign: "center", mt: 3 }}>
+                    Помилка отримання даних
+                </Typography>
+            }
             {menuData?.menu_multi_news.length ? (
                 <UpdateMenu
                     cardData={menuData?.menu_multi_news[0]}

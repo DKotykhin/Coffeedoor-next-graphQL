@@ -10,7 +10,7 @@ import AdminMenu from "./AdminMenu";
 import Spinner from "../spinner/Spinner";
 import FindText from "./FindText";
 
-import { GET_ALL_LIST, GET_ALL_MENU } from "../../apollo/catalog";
+import { GET_ALL_LIST, GET_ALL_MENU } from "../../apollo/getCatalog";
 import { ICard } from "../../types/cardType";
 import { IMenu } from "../../types/menuType";
 import ButtonGroup from "./ButtonGroup";
