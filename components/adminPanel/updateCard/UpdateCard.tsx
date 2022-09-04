@@ -32,38 +32,37 @@ const UpdateCard: React.FC<IUpdateCard> = ({ cardData, id }) => {
     const router = useRouter();
 
     const { QUERY_UPD, QUERY_DEL, QUERY_INS } = QueryConstants(cardData.__typename)
-    
-    const [UpdateItem, { data: DataUpd, loading: LoadingUpd, error: ErrorUpd }] = useMutation(QUERY_UPD, {
-        refetchQueries: [{ query: GET_ALL_LIST }]
-    });
-    const [DeleteItem, { data: DataDel, loading: LoadingDel, error: ErrorDel }] = useMutation(QUERY_DEL, {
-        refetchQueries: [{ query: GET_ALL_LIST }]
-    });
-    const [InsertItem, { data: DataIns, loading: LoadingIns, error: ErrorIns }] = useMutation(QUERY_INS, {
-        refetchQueries: [{ query: GET_ALL_LIST }]
-    });
 
-    useEffect(() => {
-        if (DataUpd || DataDel || DataIns) {
+    const [UpdateItem, { loading: LoadingUpd }] = useMutation(QUERY_UPD, {
+        refetchQueries: [{ query: GET_ALL_LIST }],
+        onCompleted: () => {
             router.push("/adminpanel");
-        }
-        DataUpd && toast.success("Successfully updated data in database");
-        DataDel && toast.success("Successfully deleted data from database");
-        DataIns && toast.success("Successfully added data to database");
-    }, [DataUpd, DataDel, DataIns, router]);
-
-    useEffect(() => {
-        if (ErrorUpd) {
-            console.warn(ErrorUpd.message);
-            toast.error(ErrorUpd.message);
-        } else if (ErrorDel) {
-            console.warn(ErrorDel.message);
-            toast.error(ErrorDel.message);
-        } else if (ErrorIns) {
-            console.warn(ErrorIns.message);
-            toast.error(ErrorIns.message);
-        }
-    }, [ErrorUpd, ErrorDel, ErrorIns]);
+            toast.success("Successfully updated data in database");
+        },
+        onError: (data) => {
+            toast.error(data.message);
+        },
+    });
+    const [DeleteItem, { loading: LoadingDel }] = useMutation(QUERY_DEL, {
+        refetchQueries: [{ query: GET_ALL_LIST }],
+        onCompleted: () => {
+            router.push("/adminpanel");
+            toast.success("Successfully deleted data from database");
+        },
+        onError: (data) => {
+            toast.error(data.message);
+        },
+    });
+    const [InsertItem, { loading: LoadingIns }] = useMutation(QUERY_INS, {
+        refetchQueries: [{ query: GET_ALL_LIST }],
+        onCompleted: () => {
+            router.push("/adminpanel");
+            toast.success("Successfully added data to database");
+        },
+        onError: (data) => {
+            toast.error(data.message);
+        },
+    });
 
     const onSubmit = (data: IFormData) => {
         const newData: INewCardData = CardData(data);

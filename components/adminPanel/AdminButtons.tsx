@@ -18,22 +18,18 @@ import ButtonGroup from "./ButtonGroup";
 const AdminButtons: React.FC = () => {
     const [collection, setCollection] = useState('');
 
-    const { loading: cardLoading, error: cardError, data: cardData } = useQuery(GET_ALL_LIST);
-    const { loading: menuLoading, error: menuError, data: menuData } = useQuery(GET_ALL_MENU);
+    const { loading: cardLoading, data: cardData } = useQuery(GET_ALL_LIST, {        
+        onError: (data) => {
+            toast.error(data.message);
+        },          
+    });
+    const { loading: menuLoading, data: menuData } = useQuery(GET_ALL_MENU, {        
+        onError: (data) => {
+            toast.error(data.message);
+        },
+    });
 
-    useEffect(() => {
-        if (cardError) {
-            console.warn(cardError.message);
-            toast.error(cardError.message);
-        } else if (menuError) {
-            console.warn(menuError.message);
-            toast.error(menuError.message);
-        }
-    }, [cardError, menuError]);
-
-    const ListClick = (collection: string) => {
-        // console.log(cardData)
-        // console.log(menuData)
+    const ListClick = (collection: string) => {        
         setCollection(collection);
     };
 
@@ -52,7 +48,7 @@ const AdminButtons: React.FC = () => {
             ) : (
                 <>                    
                     <ButtonGroup ListClick={ListClick}/>
-                    {collection === "coffeelist_multilangs" &&
+                    {collection === "coffeelist" &&
                         <>
                             <FindText length={cardData.coffeelist_multilangs.length} />
                             {cardData.coffeelist_multilangs?.map((item: ICard) => (
@@ -60,7 +56,7 @@ const AdminButtons: React.FC = () => {
                             ))}
                         </>
                     }
-                    {collection === "jamlist_multilangs" &&
+                    {collection === "jamlist" &&
                         <>
                             <FindText length={cardData.jamlist_multilangs.length} />
                             {cardData.jamlist_multilangs?.map((item: ICard) => (
@@ -68,7 +64,7 @@ const AdminButtons: React.FC = () => {
                             ))}
                         </>
                     }
-                    {collection === "tealist_multilangs" &&
+                    {collection === "tealist" &&
                         <>
                             <FindText length={cardData.tealist_multilangs.length} />
                             {cardData.tealist_multilangs?.map((item: ICard) => (
@@ -76,7 +72,7 @@ const AdminButtons: React.FC = () => {
                             ))}
                         </>
                     }
-                    {collection === "millslist_multilangs" &&
+                    {collection === "millslist" &&
                         <>
                             <FindText length={cardData.millslist_multilangs.length} />
                             {cardData.millslist_multilangs?.map((item: ICard) => (
@@ -84,7 +80,7 @@ const AdminButtons: React.FC = () => {
                             ))}
                         </>
                     }
-                    {collection === "menu_multi_news" &&
+                    {collection === "menu" &&
                         <>
                             <FindText length={menuData.menu_multi_news.length} />
                             {menuData.menu_multi_news?.map((item: IMenu) => (

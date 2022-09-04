@@ -10,7 +10,7 @@ interface IMenuItemLang {
     k: number
 }
 
-const MenuItemLang: React.FC<IMenuItemLang> = ({ cardData, register, k }) => {
+const MenuItemBlock: React.FC<IMenuItemLang> = ({ cardData, register, k }) => {
 
     return (
         <>
@@ -51,4 +51,4 @@ const MenuItemLang: React.FC<IMenuItemLang> = ({ cardData, register, k }) => {
     );
 };
 
-export default MenuItemLang;
+export default MenuItemBlock;

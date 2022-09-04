@@ -1,5 +1,4 @@
 import { Box, Button } from "@mui/material";
-import { MouseEventHandler } from "react";
 
 interface IButtonGroup {
     ListClick: (arg0: string) => void
@@ -11,35 +10,35 @@ const ButtonGroup: React.FC<IButtonGroup> = ({ ListClick }) => {
             <Button
                 variant="outlined"
                 sx={{ m: 2 }}
-                onClick={() => ListClick("coffeelist_multilangs")}
+                onClick={() => ListClick("coffeelist")}
             >
                 CoffeeList
             </Button>
             <Button
                 variant="outlined"
                 sx={{ m: 2 }}
-                onClick={() => ListClick("tealist_multilangs")}
+                onClick={() => ListClick("tealist")}
             >
                 TeaList
             </Button>
             <Button
                 variant="outlined"
                 sx={{ m: 2 }}
-                onClick={() => ListClick("jamlist_multilangs")}
+                onClick={() => ListClick("jamlist")}
             >
                 JamList
             </Button>
             <Button
                 variant="outlined"
                 sx={{ m: 2 }}
-                onClick={() => ListClick("millslist_multilangs")}
+                onClick={() => ListClick("millslist")}
             >
                 MillsList
             </Button>
             <Button
                 variant="outlined"
                 sx={{ m: 2 }}
-                onClick={() => ListClick("menu_multi_news")}
+                onClick={() => ListClick("menu")}
             >
                 Menu
             </Button>

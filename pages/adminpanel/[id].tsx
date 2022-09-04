@@ -29,7 +29,7 @@ const IdPage: NextPage = () => {
         }
     });
 
-    const cardItem = (cardData: any) => {
+    const searchCardItem = (cardData: any) => {
         if (cardData.coffeelist_multilangs.length) {
             return cardData.coffeelist_multilangs[0]
         } else if (cardData.tealist_multilangs.length) {
@@ -64,7 +64,7 @@ const IdPage: NextPage = () => {
                 />
             ) : (
                 <UpdateCard
-                    cardData={cardItem(cardData)}
+                    cardData={searchCardItem(cardData)}
                     id={router.query.id}
                 />
             )

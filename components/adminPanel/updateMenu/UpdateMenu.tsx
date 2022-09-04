@@ -9,7 +9,7 @@ import { Container, Box, Button } from "@mui/material";
 
 import TextInput from "../inputs/TextInput";
 import RadioButtonInput from "../inputs/RadioButtonInput";
-import MenuItemLang from "./MenuItemLang";
+import MenuItemBlock from "./MenuItemBlock";
 import MenuAddNewItem from "./MenuAddNewItem";
 import { MenuData } from "../formData/MenuData";
 import RadioButtonsGroup from "../updateCard/RadioButtonsGroup";
@@ -39,38 +39,36 @@ const UpdateMenu: React.FC<IUpdateMenu> = ({ cardData, id }) => {
     const { handleSubmit, register } = useForm();
     const router = useRouter();
 
-    const [UpdateMenuItem, { data: MenuDataUpd, loading: MenuLoadingUpd, error: MenuErrorUpd }] = useMutation(UPDATE_MENU_ITEM, {
-        refetchQueries: [{ query: GET_ALL_MENU }]
-    });
-    const [DeleteMenuItem, { data: MenuDataDel, loading: MenuLoadingDel, error: MenuErrorDel }] = useMutation(DELETE_MENU_ITEM, {
-        refetchQueries: [{ query: GET_ALL_MENU }]
-    });
-    const [InsertMenuItem, { data: MenuDataIns, loading: MenuLoadingIns, error: MenuErrorIns }] = useMutation(INSERT_MENU_ITEM, {
-        refetchQueries: [{ query: GET_ALL_MENU }]
-    });
-
-    useEffect(() => {
-        if (MenuDataUpd || MenuDataDel || MenuDataIns) {
+    const [UpdateMenuItem, { loading: MenuLoadingUpd }] = useMutation(UPDATE_MENU_ITEM, {
+        refetchQueries: [{ query: GET_ALL_MENU }],
+        onCompleted: () => {
             router.push("/adminpanel");
-        }
-        MenuDataUpd && toast.success("Successfully updated data in database");
-        MenuDataDel && toast.success("Successfully deleted data from database");
-        MenuDataIns && toast.success("Successfully added data to database");
-
-    }, [MenuDataDel, MenuDataIns, MenuDataUpd, router]);
-
-    useEffect(() => {
-        if (MenuErrorUpd) {
-            console.warn(MenuErrorUpd.message);
-            toast.error(MenuErrorUpd.message);
-        } else if (MenuErrorDel) {
-            console.warn(MenuErrorDel.message);
-            toast.error(MenuErrorDel.message);
-        } else if (MenuErrorIns) {
-            console.warn(MenuErrorIns.message);
-            toast.error(MenuErrorIns.message);
-        }
-    }, [MenuErrorDel, MenuErrorIns, MenuErrorUpd])
+            toast.success("Successfully updated data in database");
+        },
+        onError: (data) => {
+            toast.error(data.message);
+        },
+    });
+    const [DeleteMenuItem, { loading: MenuLoadingDel }] = useMutation(DELETE_MENU_ITEM, {
+        refetchQueries: [{ query: GET_ALL_MENU }],
+        onCompleted: () => {
+            router.push("/adminpanel");
+            toast.success("Successfully deleted data from database");
+        },
+        onError: (data) => {
+            toast.error(data.message);
+        },
+    });
+    const [InsertMenuItem, { loading: MenuLoadingIns }] = useMutation(INSERT_MENU_ITEM, {
+        refetchQueries: [{ query: GET_ALL_MENU }],
+        onCompleted: () => {
+            router.push("/adminpanel");
+            toast.success("Successfully added data to database");
+        },
+        onError: (data) => {
+            toast.error(data.message);
+        },
+    });
 
     const onSubmit = (data: IFormData) => {
         const newData = MenuData(data);
@@ -86,7 +84,7 @@ const UpdateMenu: React.FC<IUpdateMenu> = ({ cardData, id }) => {
     };
 
     const onDelete = () => {
-        console.log("Видалити: ", id);
+        // console.log("Видалити: ", id);
         const variables = {
             delete: { _id: id }
         }
@@ -121,11 +119,9 @@ const UpdateMenu: React.FC<IUpdateMenu> = ({ cardData, id }) => {
                         value={cardData?.en.title}
                         reg={register("title_en")}
                     />
-
                     {LOOP.map(i => (
-                        <MenuItemLang cardData={cardData} register={register} k={i} key={i} />
+                        <MenuItemBlock cardData={cardData} register={register} k={i} key={i} />
                     ))}
-
                     {addItem && <MenuAddNewItem register={register} k={99} />}
                     {!addGroup &&
                         <Button
@@ -135,7 +131,6 @@ const UpdateMenu: React.FC<IUpdateMenu> = ({ cardData, id }) => {
                             {addItem ? "Приховати нову позицію" : "Додати нову позицію"}
                         </Button>
                     }
-
                     <TextInput
                         label={"Позиція:"}
                         value={cardData?.position}
@@ -146,7 +141,6 @@ const UpdateMenu: React.FC<IUpdateMenu> = ({ cardData, id }) => {
                         value={cardData?.hide}
                         reg={register("hide")}
                     />
-
                     <Box sx={{ textAlign: "center", mb: 4 }}>
                         {!addGroup &&
                             <Button color="error" sx={{ mx: 2 }} onClick={onDelete}>
