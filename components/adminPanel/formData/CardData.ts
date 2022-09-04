@@ -1,8 +1,9 @@
+import { INewCardData } from "../../../types/cardType";
+
 interface IFormData {
     [key: string]: string
 }
-export const CardData = (data: IFormData) => {
-    
+export const CardData = (data: IFormData) : INewCardData => {    
     const body_ua = {
         title: data.title_ua,
         name: data.name_ua,

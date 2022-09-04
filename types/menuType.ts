@@ -4,13 +4,16 @@ export interface IMenuList {
     }
 }
 
-export interface IMenu {
-    _id: string;
+export interface IMenu extends INewMenu {
+    _id: string;    
+}
+
+export interface INewMenu {    
     ua: IItem;
     ru: IItem;
     en: IItem;        
     hide: boolean;
-    position: number;
+    position?: number;
 }
 
 export interface ITitle {
@@ -22,11 +25,7 @@ interface IItem {
     title: string;
 }
 
-export interface IBody {
-    // map(arg0: (item: IBody, i: number) => JSX.Element): import("react").ReactNode;
-    // [x: string]: any;
-    // map: any;
-    // map(arg0: (item: any, i: any) => JSX.Element): import("react").ReactNode;
+export interface IBody {    
     name: string;
     description?: string;
     price: string
