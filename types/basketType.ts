@@ -16,5 +16,5 @@ export interface IFormData {
 
 export interface ITelegramData {
     formdata: IFormData;
-    data: IBasket[]
+    basketdata: IBasket[]
 }
