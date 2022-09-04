@@ -26,19 +26,18 @@ import { IMenu } from "../../../types/menuType";
 interface IFormData {
     [key: string]: string
 }
-
 interface IUpdateMenu {
     cardData: IMenu,
     id: string | string[] | undefined
 }
+
+const LOOP = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 const UpdateMenu: React.FC<IUpdateMenu> = ({ cardData, id }) => {
     const [addItem, setAddItem] = useState(false);
     const [addGroup, setAddGroup] = useState(false);
     const { handleSubmit, register } = useForm();
     const router = useRouter();
-
-    const LOOP = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 
     const [UpdateMenuItem, { data: MenuDataUpd, loading: MenuLoadingUpd, error: MenuErrorUpd }] = useMutation(UPDATE_MENU_ITEM, {
         refetchQueries: [{ query: GET_ALL_MENU }]
@@ -54,9 +53,9 @@ const UpdateMenu: React.FC<IUpdateMenu> = ({ cardData, id }) => {
         if (MenuDataUpd || MenuDataDel || MenuDataIns) {
             router.push("/adminpanel");
         }
-        MenuDataUpd && toast.success("Successfully update data in database");
+        MenuDataUpd && toast.success("Successfully updated data in database");
         MenuDataDel && toast.success("Successfully deleted data from database");
-        MenuDataIns && toast.success("Successfully add data to database");
+        MenuDataIns && toast.success("Successfully added data to database");
 
     }, [MenuDataDel, MenuDataIns, MenuDataUpd, router]);
 
@@ -122,7 +121,7 @@ const UpdateMenu: React.FC<IUpdateMenu> = ({ cardData, id }) => {
                         value={cardData?.en.title}
                         reg={register("title_en")}
                     />
-                    
+
                     {LOOP.map(i => (
                         <MenuItemLang cardData={cardData} register={register} k={i} key={i} />
                     ))}

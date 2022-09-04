@@ -1,7 +1,7 @@
 import { Divider, Typography, Box, Paper } from "@mui/material";
-import { IBody } from "../../../types/cardType";
 
 import CardText from "./CardText";
+import { IBody } from "../../../types/cardType";
 
 interface IOneLang {
     item: IBody

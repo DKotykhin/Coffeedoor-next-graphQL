@@ -3,7 +3,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
-import { DocumentNode, useMutation } from '@apollo/client';
+import { useMutation } from '@apollo/client';
 
 import { Container, Box, Button } from "@mui/material";
 
@@ -12,12 +12,9 @@ import CardForm from "../cardItems/CardForm";
 import { CardData } from "../formData/CardData";
 import RadioButtonsGroup from "./RadioButtonsGroup";
 import ReturnLink from "./ReturnLink";
+import QueryConstants from "./QueryConstants";
 
-import { UPDATE_COFFEE_ITEM, UPDATE_TEA_ITEM, UPDATE_JAM_ITEM, UPDATE_MILLS_ITEM } from "../../../apollo/updateItem";
-import { DELETE_COFFEE_ITEM, DELETE_TEA_ITEM, DELETE_JAM_ITEM, DELETE_MILLS_ITEM } from "../../../apollo/deleteItem";
-import { INSERT_COFFEE_ITEM, INSERT_TEA_ITEM, INSERT_JAM_ITEM, INSERT_MILLS_ITEM } from "../../../apollo/insertItem"
 import { GET_ALL_LIST } from "../../../apollo/getCatalog";
-
 import { ICard, INewCardData } from "../../../types/cardType";
 
 interface IUpdateCard {
@@ -28,30 +25,14 @@ interface IUpdateCard {
 interface IFormData {
     [key: string]: string
 }
-let QUERY_UPD: DocumentNode, QUERY_DEL: DocumentNode, QUERY_INS: DocumentNode;
 
 const UpdateCard: React.FC<IUpdateCard> = ({ cardData, id }) => {
     const [add, setAdd] = useState(false);
     const { handleSubmit, register } = useForm();
     const router = useRouter();
 
-    if (cardData.__typename === "Coffeelist_multilang") {
-        QUERY_UPD = UPDATE_COFFEE_ITEM;
-        QUERY_DEL = DELETE_COFFEE_ITEM;
-        QUERY_INS = INSERT_COFFEE_ITEM;
-    } else if (cardData.__typename === "Tealist_multilang") {
-        QUERY_UPD = UPDATE_TEA_ITEM;
-        QUERY_DEL = DELETE_TEA_ITEM;
-        QUERY_INS = INSERT_TEA_ITEM;
-    } else if (cardData.__typename === "Jamlist_multilang") {
-        QUERY_UPD = UPDATE_JAM_ITEM;
-        QUERY_DEL = DELETE_JAM_ITEM;
-        QUERY_INS = INSERT_JAM_ITEM;
-    } else if (cardData.__typename === "Millslist_multilang") {
-        QUERY_UPD = UPDATE_MILLS_ITEM;
-        QUERY_DEL = DELETE_MILLS_ITEM;
-        QUERY_INS = INSERT_MILLS_ITEM;
-    }
+    const { QUERY_UPD, QUERY_DEL, QUERY_INS } = QueryConstants(cardData.__typename)
+    
     const [UpdateItem, { data: DataUpd, loading: LoadingUpd, error: ErrorUpd }] = useMutation(QUERY_UPD, {
         refetchQueries: [{ query: GET_ALL_LIST }]
     });
@@ -66,9 +47,9 @@ const UpdateCard: React.FC<IUpdateCard> = ({ cardData, id }) => {
         if (DataUpd || DataDel || DataIns) {
             router.push("/adminpanel");
         }
-        DataUpd && toast.success("Successfully update data in database");
+        DataUpd && toast.success("Successfully updated data in database");
         DataDel && toast.success("Successfully deleted data from database");
-        DataIns && toast.success("Successfully add data to database");
+        DataIns && toast.success("Successfully added data to database");
     }, [DataUpd, DataDel, DataIns, router]);
 
     useEffect(() => {

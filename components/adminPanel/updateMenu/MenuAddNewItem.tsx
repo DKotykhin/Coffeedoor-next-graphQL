@@ -24,23 +24,23 @@ const MenuAddNewItem: React.FC<IMenuItemNew> = ({ register, k }) => {
             </Typography>
             <Box sx={{ my: 1 }}>
                 <Paper elevation={4} sx={{ p: 1 }}>
-                    <TextInput label={"Напій:"} reg={register(`name0${k}`)} />
-                    <TextInput label={"Опис:"} reg={register(`desc0${k}`)} />
-                    <TextInput label={"Ціна:"} reg={register(`price0${k}`)} />
+                    <TextInput label={"Напій:"} reg={register(`name_ua_${k}`)} />
+                    <TextInput label={"Опис:"} reg={register(`desc_ua_${k}`)} />
+                    <TextInput label={"Ціна:"} reg={register(`price_ua_${k}`)} />
                 </Paper>
             </Box>
             <Box sx={{ my: 1 }}>
                 <Paper elevation={4} sx={{ p: 1 }}>
-                    <TextInput label={"Напій:"} reg={register(`name1${k}`)} />
-                    <TextInput label={"Опис:"} reg={register(`desc1${k}`)} />
-                    <TextInput label={"Ціна:"} reg={register(`price1${k}`)} />
+                    <TextInput label={"Напій:"} reg={register(`name_ru_${k}`)} />
+                    <TextInput label={"Опис:"} reg={register(`desc_ru_${k}`)} />
+                    <TextInput label={"Ціна:"} reg={register(`price_ru_${k}`)} />
                 </Paper>
             </Box>
             <Box sx={{ my: 1 }}>
                 <Paper elevation={4} sx={{ p: 1 }}>
-                    <TextInput label={"Напій:"} reg={register(`name2${k}`)} />
-                    <TextInput label={"Опис:"} reg={register(`desc2${k}`)} />
-                    <TextInput label={"Ціна:"} reg={register(`price2${k}`)} />
+                    <TextInput label={"Напій:"} reg={register(`name_en_${k}`)} />
+                    <TextInput label={"Опис:"} reg={register(`desc_en_${k}`)} />
+                    <TextInput label={"Ціна:"} reg={register(`price_en_${k}`)} />
                 </Paper>
             </Box>
         </Box>
