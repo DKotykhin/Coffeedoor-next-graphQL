@@ -27,14 +27,14 @@ const AdminMenu: React.FC<IMenuCard> = ({ props }) => {
                     <MenuOneLangBody item={item} />
                 </Box>
             ))}           
-            <MenuOneLangTitle title={props.en.title}/>
-            {props.en.body?.map((item, i) => (
+            <MenuOneLangTitle title={props.ru.title}/>
+            {props.ru.body?.map((item, i) => (
                 <Box key={i} sx={{ my: 1 }}>
                     <MenuOneLangBody item={item} />
                 </Box>
             ))}
-            <MenuOneLangTitle title={props.ru.title}/>
-            {props.ru.body?.map((item, i) => (
+            <MenuOneLangTitle title={props.en.title}/>
+            {props.en.body?.map((item, i) => (
                 <Box key={i} sx={{ my: 1 }}>
                     <MenuOneLangBody item={item} />
                 </Box>

@@ -8,7 +8,7 @@ import TextInput from "../inputs/TextInput";
 interface IMenuItem {
     item: IBody;
     register: UseFormRegister<FieldValues>;
-    j: number;
+    j: string;
     k: number
 }
 
@@ -20,17 +20,17 @@ const MenuItem: React.FC<IMenuItem> = ({ item, register, j, k }) => {
                 <TextInput
                     label={"Напій:"}
                     value={item?.name}
-                    reg={register(`name${j}${k}`)}
+                    reg={register(`name_${j}_${k}`)}
                 />
                 <TextInput
                     label={"Опис:"}
                     value={item?.description}
-                    reg={register(`desc${j}${k}`)}
+                    reg={register(`desc_${j}_${k}`)}
                 />
                 <TextInput
                     label={"Ціна:"}
                     value={item?.price}
-                    reg={register(`price${j}${k}`)}
+                    reg={register(`price_${j}_${k}`)}
                 />
             </Paper>
         </Box>

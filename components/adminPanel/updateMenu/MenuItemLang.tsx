@@ -30,19 +30,19 @@ const MenuItemLang: React.FC<IMenuItemLang> = ({ cardData, register, k }) => {
                     <MenuItem
                         item={cardData.ua.body[k]}
                         register={register}
-                        j={0}
+                        j={'ua'}
                         k={k}
                     />
                     <MenuItem
                         item={cardData.ru.body[k]}
                         register={register}
-                        j={1}
+                        j={'ru'}
                         k={k}
                     />
                     <MenuItem
                         item={cardData.en.body[k]}
                         register={register}
-                        j={2}
+                        j={'en'}
                         k={k}
                     />
                 </Box>

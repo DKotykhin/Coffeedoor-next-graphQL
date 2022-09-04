@@ -16,7 +16,7 @@ import RadioButtonsGroup from "../updateCard/RadioButtonsGroup";
 import ReturnLink from "../updateCard/ReturnLink";
 import Spinner from "../../spinner/Spinner";
 
-import { GET_ALL_LIST } from "../../../apollo/getCatalog";
+import { GET_ALL_MENU } from "../../../apollo/getCatalog";
 import { UPDATE_MENU_ITEM } from "../../../apollo/updateItem";
 import { DELETE_MENU_ITEM } from "../../../apollo/deleteItem";
 import { INSERT_MENU_ITEM } from "../../../apollo/insertItem"
@@ -38,14 +38,16 @@ const UpdateMenu: React.FC<IUpdateMenu> = ({ cardData, id }) => {
     const { handleSubmit, register } = useForm();
     const router = useRouter();
 
+    const LOOP = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+
     const [UpdateMenuItem, { data: MenuDataUpd, loading: MenuLoadingUpd, error: MenuErrorUpd }] = useMutation(UPDATE_MENU_ITEM, {
-        refetchQueries: [{ query: GET_ALL_LIST }]
+        refetchQueries: [{ query: GET_ALL_MENU }]
     });
     const [DeleteMenuItem, { data: MenuDataDel, loading: MenuLoadingDel, error: MenuErrorDel }] = useMutation(DELETE_MENU_ITEM, {
-        refetchQueries: [{ query: GET_ALL_LIST }]
+        refetchQueries: [{ query: GET_ALL_MENU }]
     });
     const [InsertMenuItem, { data: MenuDataIns, loading: MenuLoadingIns, error: MenuErrorIns }] = useMutation(INSERT_MENU_ITEM, {
-        refetchQueries: [{ query: GET_ALL_LIST }]
+        refetchQueries: [{ query: GET_ALL_MENU }]
     });
 
     useEffect(() => {
@@ -92,7 +94,7 @@ const UpdateMenu: React.FC<IUpdateMenu> = ({ cardData, id }) => {
         DeleteMenuItem({ variables })
     };
 
-    const onChange = (data: string) => {        
+    const onChange = (data: string) => {
         if (data === 'add') setAddGroup(true)
         else setAddGroup(false)
     }
@@ -120,17 +122,10 @@ const UpdateMenu: React.FC<IUpdateMenu> = ({ cardData, id }) => {
                         value={cardData?.en.title}
                         reg={register("title_en")}
                     />
-
-                    <MenuItemLang cardData={cardData} register={register} k={0} />
-                    <MenuItemLang cardData={cardData} register={register} k={1} />
-                    <MenuItemLang cardData={cardData} register={register} k={2} />
-                    <MenuItemLang cardData={cardData} register={register} k={3} />
-                    <MenuItemLang cardData={cardData} register={register} k={4} />
-                    <MenuItemLang cardData={cardData} register={register} k={5} />
-                    <MenuItemLang cardData={cardData} register={register} k={6} />
-                    <MenuItemLang cardData={cardData} register={register} k={7} />
-                    <MenuItemLang cardData={cardData} register={register} k={8} />
-                    <MenuItemLang cardData={cardData} register={register} k={9} />
+                    
+                    {LOOP.map(i => (
+                        <MenuItemLang cardData={cardData} register={register} k={i} key={i} />
+                    ))}
 
                     {addItem && <MenuAddNewItem register={register} k={99} />}
                     {!addGroup &&
