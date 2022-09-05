@@ -30,8 +30,6 @@ interface IUpdateMenu {
     id: string | string[] | undefined
 }
 
-const LOOP = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
-
 const UpdateMenu: React.FC<IUpdateMenu> = ({ cardData, id }) => {
     const [addItem, setAddItem] = useState(false);
     const [addGroup, setAddGroup] = useState(false);
@@ -116,8 +114,8 @@ const UpdateMenu: React.FC<IUpdateMenu> = ({ cardData, id }) => {
                         label={"Назва en:"}
                         value={cardData?.en.title}
                         reg={register("title_en")}
-                    />
-                    {LOOP.map(i => (
+                    />                   
+                    {cardData.ua.body.map((item, i) => (
                         <MenuItemBlock cardData={cardData} register={register} k={i} key={i} />
                     ))}
                     {addItem && <MenuAddNewItem register={register} k={99} />}
