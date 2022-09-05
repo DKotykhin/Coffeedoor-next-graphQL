@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
@@ -13,7 +13,6 @@ import MenuItemBlock from "./MenuItemBlock";
 import MenuAddNewItem from "./MenuAddNewItem";
 import { MenuData } from "../formData/MenuData";
 import RadioButtonsGroup from "../updateCard/RadioButtonsGroup";
-import ReturnLink from "../updateCard/ReturnLink";
 import Spinner from "../../spinner/Spinner";
 
 import { GET_ALL_MENU } from "../../../apollo/getCatalog";
@@ -97,7 +96,6 @@ const UpdateMenu: React.FC<IUpdateMenu> = ({ cardData, id }) => {
     }
 
     if (MenuLoadingUpd || MenuLoadingDel || MenuLoadingIns) return <Spinner />;
-    if (!cardData) return <ReturnLink />
 
     return (
         <Container sx={{ my: 2 }}>

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
@@ -11,7 +11,6 @@ import Spinner from "../../spinner/Spinner";
 import CardForm from "../cardItems/CardForm";
 import { CardData } from "../formData/CardData";
 import RadioButtonsGroup from "./RadioButtonsGroup";
-import ReturnLink from "./ReturnLink";
 import QueryConstants from "./QueryConstants";
 
 import { GET_ALL_LIST } from "../../../apollo/getCatalog";
@@ -92,7 +91,6 @@ const UpdateCard: React.FC<IUpdateCard> = ({ cardData, id }) => {
     }
 
     if (LoadingIns || LoadingDel || LoadingUpd) return <Spinner />;
-    if (!cardData) return <ReturnLink />;
 
     return (
         <Container sx={{ my: 2 }}>

@@ -1,5 +1,6 @@
 import Head from "next/head";
 import { useRouter } from "next/router";
+import { useState } from "react";
 import type { NextPage } from 'next';
 import { useQuery } from '@apollo/client';
 
@@ -8,19 +9,33 @@ import { Typography } from "@mui/material";
 import UpdateCard from "../../components/adminPanel/updateCard/UpdateCard";
 import UpdateMenu from "../../components/adminPanel/updateMenu/UpdateMenu";
 import Spinner from "../../components/spinner/Spinner";
+import ReturnLink from "../../components/adminPanel/updateCard/ReturnLink";
 
 import { GET_ALL_LIST, GET_ALL_MENU } from "../../apollo/getCatalog";
+import { ICard, ICatalogList } from "../../types/cardType";
 
 const IdPage: NextPage = () => {
     const router = useRouter();
+    const [cardItem, setCardItem] = useState<ICard>();
 
-    const { loading: cardLoading, error: cardError, data: cardData } = useQuery(GET_ALL_LIST, {
+    const { loading: cardLoading, error: cardError } = useQuery(GET_ALL_LIST, {
         variables: {
             query1: { _id: router.query.id },
             query2: { _id: router.query.id },
             query3: { _id: router.query.id },
             query4: { _id: router.query.id },
-        }
+        },
+        onCompleted(data: ICatalogList) {
+            let key: keyof typeof data;
+            for (key in data) {
+                if (Object.prototype.hasOwnProperty.call(data, key)) {
+                    const element = data[key];
+                    if (element.length) {
+                        setCardItem(element[0])
+                    }
+                }
+            }
+        },
     });
 
     const { loading: menuLoading, error: menuError, data: menuData } = useQuery(GET_ALL_MENU, {
@@ -28,18 +43,6 @@ const IdPage: NextPage = () => {
             query: { _id: router.query.id },
         }
     });
-
-    const searchCardItem = (cardData: any) => {
-        if (cardData.coffeelist_multilangs.length) {
-            return cardData.coffeelist_multilangs[0]
-        } else if (cardData.tealist_multilangs.length) {
-            return cardData.tealist_multilangs[0]
-        } else if (cardData.jamlist_multilangs.length) {
-            return cardData.jamlist_multilangs[0]
-        } else if (cardData.millslist_multilangs.length) {
-            return cardData.millslist_multilangs[0]
-        }
-    }
 
     if (cardLoading || menuLoading) return <Spinner />;
 
@@ -62,13 +65,12 @@ const IdPage: NextPage = () => {
                     cardData={menuData?.menu_multi_news[0]}
                     id={router.query.id}
                 />
-            ) : (
-                <UpdateCard
-                    cardData={searchCardItem(cardData)}
+            ) : (cardItem ?
+                (<UpdateCard
+                    cardData={cardItem}
                     id={router.query.id}
-                />
-            )
-            }
+                />) : <ReturnLink />
+            )}
         </>
     );
 };
