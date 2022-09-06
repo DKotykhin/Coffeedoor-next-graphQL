@@ -35,7 +35,7 @@ const Catalog: React.FC<ICatalog> = ({ cataloglist }) => {
     return (
         <>
             <ItemList
-                props={cataloglist?.coffeelist_multilangs}
+                props={cataloglist?.coffeelist}
                 showfilter={false}
                 i={i}                
                 id={"coffee_list"}
@@ -43,7 +43,7 @@ const Catalog: React.FC<ICatalog> = ({ cataloglist }) => {
                 subtitle={t("coffee_subtitle")}
             />
             <ItemList
-                props={cataloglist?.tealist_multilangs}
+                props={cataloglist?.tealist}
                 showfilter={true}
                 i={i}
                 filterArray={teaFilter}
@@ -52,7 +52,7 @@ const Catalog: React.FC<ICatalog> = ({ cataloglist }) => {
                 subtitle={t("tea_subtitle")}
             />
             <ItemList
-                props={cataloglist?.jamlist_multilangs}
+                props={cataloglist?.jamlist}
                 showfilter={false}
                 i={i}                
                 id={"jam_list"}
@@ -60,7 +60,7 @@ const Catalog: React.FC<ICatalog> = ({ cataloglist }) => {
                 subtitle={t("jam_subtitle")}
             />
             <ItemList
-                props={cataloglist?.millslist_multilangs}
+                props={cataloglist?.millslist}
                 showfilter={false}
                 i={i}                
                 id={"mills_list"}

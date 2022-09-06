@@ -7,7 +7,7 @@ export const GET_ALL_LIST: DocumentNode = gql `
         $query3: Jamlist_multilangQueryInput
         $query4: Millslist_multilangQueryInput
     ) {
-        coffeelist_multilangs(sortBy: POSITION_ASC, query: $query1) {
+        coffeelist: coffeelist_multilangs(sortBy: POSITION_ASC, query: $query1) {
             body {
                 title
                 name
@@ -24,12 +24,13 @@ export const GET_ALL_LIST: DocumentNode = gql `
             hide
             position
         }
-        jamlist_multilangs(sortBy: POSITION_ASC, query: $query3) {
+        jamlist: jamlist_multilangs(sortBy: POSITION_ASC, query: $query3) {
             body {
                 title
                 name
                 description
                 tm
+                country
             }
             _id
             card_img
@@ -40,7 +41,7 @@ export const GET_ALL_LIST: DocumentNode = gql `
             hide
             position
         }
-        tealist_multilangs(sortBy: POSITION_ASC, query: $query2) {
+        tealist: tealist_multilangs(sortBy: POSITION_ASC, query: $query2) {
             body {
                 title
                 name
@@ -61,7 +62,7 @@ export const GET_ALL_LIST: DocumentNode = gql `
             hide
             position
         }
-        millslist_multilangs(sortBy: POSITION_ASC, query: $query4) {
+        millslist: millslist_multilangs(sortBy: POSITION_ASC, query: $query4) {
             body {
                 title
                 name
@@ -85,7 +86,7 @@ export const GET_ALL_LIST: DocumentNode = gql `
 
 export const GET_ALL_MENU: DocumentNode = gql `
     query GetAllMenu($query: Menu_multi_newQueryInput) {
-        menu_multi_news(sortBy: POSITION_ASC, query: $query) {
+        menu: menu_multi_news(sortBy: POSITION_ASC, query: $query) {
             _id
             ua {
                 body {

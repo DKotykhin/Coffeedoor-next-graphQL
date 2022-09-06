@@ -60,9 +60,9 @@ const IdPage: NextPage = () => {
                     Помилка отримання даних
                 </Typography>
             }
-            {menuData?.menu_multi_news.length ? (
+            {menuData?.menu.length ? (
                 <UpdateMenu
-                    cardData={menuData?.menu_multi_news[0]}
+                    cardData={menuData?.menu[0]}
                     id={router.query.id}
                 />
             ) : (cardItem ?

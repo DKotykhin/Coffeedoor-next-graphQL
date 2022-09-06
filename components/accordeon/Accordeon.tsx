@@ -63,7 +63,7 @@ const Accordeon: React.FC<IMenuList> = ({ menulist }) => {
 
     return (
         <Container maxWidth="md" className={styles.accordeon_block}>
-            {menulist.menu_multi_news?.map((item, i) => (
+            {menulist.menu?.map((item, i) => (
                 <Accordion
                     key={i}
                     expanded={expanded === `panel${i}`}

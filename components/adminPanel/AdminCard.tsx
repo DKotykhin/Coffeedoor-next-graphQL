@@ -1,5 +1,4 @@
 import { useRouter } from "next/router";
-import { useAppDispatch } from "../../store/hook";
 
 import { Container, Typography, Box, Button } from "@mui/material";
 
@@ -14,7 +13,6 @@ interface IAdminCard {
 
 const AdminCard: React.FC<IAdminCard> = ({ props }) => {
     const router = useRouter();
-    const dispatch = useAppDispatch();
 
     const editorClick = () => {
         router.push(`/adminpanel/${props._id}`);
