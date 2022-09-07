@@ -9,11 +9,11 @@ import AdminCard from "./AdminCard";
 import AdminMenu from "./AdminMenu";
 import Spinner from "../spinner/Spinner";
 import FindText from "./FindText";
+import ButtonGroup from "./ButtonGroup";
 
 import { GET_ALL_LIST, GET_ALL_MENU } from "../../apollo/getCatalog";
 import { ICard } from "../../types/cardType";
 import { IMenu } from "../../types/menuType";
-import ButtonGroup from "./ButtonGroup";
 
 const AdminButtons: React.FC = () => {
     const [collection, setCollection] = useState('');
@@ -46,11 +46,11 @@ const AdminButtons: React.FC = () => {
                     Повернутися на головну
                 </Button>
             </Link>
+            <ButtonGroup ListClick={ListClick} />
             {(cardLoading || menuLoading) ? (
                 <Spinner />
             ) : (
                 <>
-                    <ButtonGroup ListClick={ListClick} />
                     {collection === "coffeelist" &&
                         <>
                             <FindText length={cardData.coffeelist.length} />
