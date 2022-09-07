@@ -14,8 +14,8 @@ interface IAdminCard {
 const AdminCard: React.FC<IAdminCard> = ({ props }) => {
     const router = useRouter();
 
-    const editorClick = () => {
-        router.push(`/adminpanel/${props._id}`);
+    const editorClick = (id: string) => {
+        router.push(`/adminpanel/${id}`);        
     };
 
     return (
@@ -52,7 +52,7 @@ const AdminCard: React.FC<IAdminCard> = ({ props }) => {
                 label={"Приховати картку:"}
                 value={props.hide ? "Так" : "Ні"}
             />
-            <Button sx={{ m: 2 }} onClick={editorClick}>
+            <Button sx={{ m: 2 }} onClick={() => editorClick(props._id)}>
                 Редагувати
             </Button>
         </Container>
