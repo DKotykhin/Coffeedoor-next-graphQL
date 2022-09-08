@@ -13,10 +13,12 @@ import ReturnLink from "../../components/adminPanel/updateCard/ReturnLink";
 
 import { GET_ALL_LIST, GET_ALL_MENU } from "../../apollo/getCatalog";
 import { ICard, ICatalogList } from "../../types/cardType";
+import { IMenu, IMenuList } from "../../types/menuType";
 
 const IdPage: NextPage = () => {
     const router = useRouter();
     const [cardItem, setCardItem] = useState<ICard>();
+    const [menuItem, setMenuItem] = useState<IMenu>();
 
     const { loading: cardLoading, error: cardError } = useQuery(GET_ALL_LIST, {
         variables: {
@@ -38,9 +40,14 @@ const IdPage: NextPage = () => {
         },
     });
 
-    const { loading: menuLoading, error: menuError, data: menuData } = useQuery(GET_ALL_MENU, {
+    const { loading: menuLoading, error: menuError } = useQuery(GET_ALL_MENU, {
         variables: {
             query: { _id: router.query.id },
+        },
+        onCompleted(data: IMenuList) {
+            if (data.menu.length) {
+                setMenuItem(data.menu[0])
+            }
         }
     });
 
@@ -60,16 +67,17 @@ const IdPage: NextPage = () => {
                     Помилка отримання даних
                 </Typography>
             }
-            {menuData?.menu.length ? (
+            {menuItem ? (
                 <UpdateMenu
-                    cardData={menuData?.menu[0]}
+                    cardData={menuItem}
                     id={router.query.id}
                 />
-            ) : (cardItem ?
-                (<UpdateCard
+            ) : (cardItem ? (
+                <UpdateCard
                     cardData={cardItem}
                     id={router.query.id}
-                />) : <ReturnLink />
+                />
+            ) : <ReturnLink />
             )}
         </>
     );

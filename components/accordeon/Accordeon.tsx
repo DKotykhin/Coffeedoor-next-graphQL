@@ -52,8 +52,11 @@ const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
     borderTop: "1px solid rgba(0, 0, 0, .125)",
 }));
 
+interface IAccordeon {
+    menulist: IMenuList
+}
 
-const Accordeon: React.FC<IMenuList> = ({ menulist }) => {
+const Accordeon: React.FC<IAccordeon> = ({ menulist }) => {
     const [expanded, setExpanded] = React.useState("");
     const router = useRouter();
 

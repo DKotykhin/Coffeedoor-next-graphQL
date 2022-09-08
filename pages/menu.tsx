@@ -9,7 +9,11 @@ import client from '../apollo/client';
 import { GET_ALL_MENU } from "../apollo/getCatalog";
 import { IMenuList } from "../types/menuType";
 
-const MenuPage: React.FC<IMenuList> = ({ menulist }) => {
+interface IMenuPage {
+    menulist: IMenuList
+}
+
+const MenuPage: React.FC<IMenuPage> = ({ menulist }) => {
     return (
         <>
             <Head>

@@ -1,23 +1,21 @@
 export interface IMenuList {
-    menulist: {
-        menu: IMenu[];
-    }
+    menu: IMenu[];
 }
 
 export interface IMenu extends INewMenu {
-    _id: string;    
+    _id: string;
 }
 
-export interface INewMenu {    
+export interface INewMenu {
     ua: IItem;
     ru: IItem;
-    en: IItem;        
+    en: IItem;
     hide: boolean;
     position?: number;
 }
 
 export interface ITitle {
-    title: string
+    title: string;
 }
 
 interface IItem {
@@ -25,8 +23,8 @@ interface IItem {
     title: string;
 }
 
-export interface IBody {    
+export interface IBody {
     name: string;
     description?: string;
-    price: string
+    price: string;
 }
