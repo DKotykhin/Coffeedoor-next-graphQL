@@ -28,7 +28,7 @@ const IdPage: NextPage = () => {
             query4: { _id: router.query.id },
         },
         onCompleted(data: ICatalogList) {
-            let key: keyof typeof data;
+            let key: keyof ICatalogList;
             for (key in data) {
                 if (Object.prototype.hasOwnProperty.call(data, key)) {
                     const element = data[key];

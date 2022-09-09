@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import { GetStaticProps } from 'next';
+import { GetStaticProps, NextPage } from 'next';
 
 import NavDrawer from "../components/drawer/Drawer";
 import FirstBlock from "../components/firstBlock/FirstBlock";
@@ -16,7 +16,7 @@ interface ICatalog {
     cataloglist: ICatalogList
 }
 
-const Home: React.FC<ICatalog> = ({ cataloglist }) => {
+const Home: NextPage<ICatalog> = ({ cataloglist }) => {
 
     return (
         <div>
@@ -40,8 +40,8 @@ const Home: React.FC<ICatalog> = ({ cataloglist }) => {
             </Head>
             <NavDrawer />
             <FirstBlock />
-            <InfoBlock />           
-            <Catalog cataloglist={cataloglist} />            
+            <InfoBlock />
+            <Catalog cataloglist={cataloglist} />
             <AboutBlock />
             <Basket />
         </div>
@@ -50,7 +50,7 @@ const Home: React.FC<ICatalog> = ({ cataloglist }) => {
 
 export default Home;
 
-export const getStaticProps: GetStaticProps  = async () => {
+export const getStaticProps: GetStaticProps = async () => {
     const { data } = await client.query({
         query: GET_ALL_LIST,
         variables: {

@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { GetStaticProps } from 'next';
+import { GetStaticProps, NextPage } from 'next';
 
 import Accordeon from "../components/accordeon/Accordeon";
 import MenuTitle from "../components/menuTitle/MenuTitle";
@@ -13,15 +13,15 @@ interface IMenuPage {
     menulist: IMenuList
 }
 
-const MenuPage: React.FC<IMenuPage> = ({ menulist }) => {
+const MenuPage: NextPage<IMenuPage> = ({ menulist }) => {
     return (
         <>
             <Head>
                 <meta name="description" content="Меню кав'ярні" />
                 <title>{"Меню кав'ярні"}</title>
             </Head>
-            <MenuTitle />            
-            <Accordeon menulist={menulist} />            
+            <MenuTitle />
+            <Accordeon menulist={menulist} />
             <ReturnButton />
         </>
     );

@@ -89,7 +89,7 @@ const basketdataListSlice = createSlice({
             .addCase(sendDataToTelegram.fulfilled, (state) => {
                 state.basketdata = [];
             })
-            .addCase(sendDataToTelegram.rejected, (state, action) => {
+            .addCase(sendDataToTelegram.rejected, (state, action: PayloadAction<string | undefined>) => {
                 console.log("Something get wrong: ", action.payload);
             });
     },

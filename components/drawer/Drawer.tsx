@@ -26,7 +26,7 @@ interface IDrawerTitle {
     id: string
 }
 
-export default function NavDrawer() {
+const NavDrawer: React.FC = () => {
     const router = useRouter();
     const [state, setState] = useState(false);
     let { t } = useTranslation("firstblock");
@@ -132,3 +132,5 @@ export default function NavDrawer() {
         </div>
     );
 }
+
+export default NavDrawer;

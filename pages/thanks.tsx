@@ -1,7 +1,8 @@
+import { NextPage } from "next";
 import Head from "next/head";
 import ThanksBlock from "../components/thanksBlock/ThanksBlock";
 
-const ThanksPage: React.FC = () => {
+const ThanksPage: NextPage = () => {
     return (
         <>
             <Head>
