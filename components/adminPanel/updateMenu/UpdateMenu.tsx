@@ -15,10 +15,10 @@ import { MenuData } from "../formData/MenuData";
 import RadioButtonsGroup from "../updateCard/RadioButtonsGroup";
 import Spinner from "../../spinner/Spinner";
 
-import { GET_ALL_MENU } from "../../../apollo/getCatalog";
-import { UPDATE_MENU_ITEM } from "../../../apollo/updateItem";
-import { DELETE_MENU_ITEM } from "../../../apollo/deleteItem";
-import { INSERT_MENU_ITEM } from "../../../apollo/insertItem"
+import { GET_ALL_MENU } from "../../../apollo/query/getMenu";
+import { UPDATE_MENU_ITEM } from "../../../apollo/mutation/updateItem";
+import { DELETE_MENU_ITEM } from "../../../apollo/mutation/deleteItem";
+import { INSERT_MENU_ITEM } from "../../../apollo/mutation/insertItem"
 
 import { IMenu } from "../../../types/menuType";
 

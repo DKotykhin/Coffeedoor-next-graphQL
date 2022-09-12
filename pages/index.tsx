@@ -9,7 +9,7 @@ import AboutBlock from "../components/aboutblock/AboutBlock";
 import Basket from "../components/basket/Basket";
 
 import client from '../apollo/client';
-import { GET_ALL_LIST } from "../apollo/getCatalog";
+import { GET_ALL_LIST } from "../apollo/query/getCatalog";
 import { ICatalogList } from '../types/cardType';
 
 interface ICatalog {

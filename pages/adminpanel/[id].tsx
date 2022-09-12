@@ -11,16 +11,23 @@ import UpdateMenu from "../../components/adminPanel/updateMenu/UpdateMenu";
 import Spinner from "../../components/spinner/Spinner";
 import ReturnLink from "../../components/adminPanel/updateCard/ReturnLink";
 
-import { GET_ALL_LIST, GET_ALL_MENU } from "../../apollo/getCatalog";
+import { GET_ALL_LIST } from "../../apollo/query/getCatalog";
+import {  GET_ALL_MENU } from "../../apollo/query/getMenu"
 import { ICard, ICatalogList } from "../../types/cardType";
 import { IMenu, IMenuList } from "../../types/menuType";
+
+interface IQueryVar {
+    [key: string]: {
+        _id: string | string[] | undefined
+    }
+}
 
 const IdPage: NextPage = () => {
     const router = useRouter();
     const [cardItem, setCardItem] = useState<ICard>();
     const [menuItem, setMenuItem] = useState<IMenu>();
 
-    const { loading: cardLoading, error: cardError } = useQuery(GET_ALL_LIST, {
+    const { loading: cardLoading, error: cardError } = useQuery<ICatalogList, IQueryVar>(GET_ALL_LIST, {
         variables: {
             query1: { _id: router.query.id },
             query2: { _id: router.query.id },
@@ -40,7 +47,7 @@ const IdPage: NextPage = () => {
         },
     });
 
-    const { loading: menuLoading, error: menuError } = useQuery(GET_ALL_MENU, {
+    const { loading: menuLoading, error: menuError } = useQuery<IMenuList, IQueryVar>(GET_ALL_MENU, {
         variables: {
             query: { _id: router.query.id },
         },

@@ -13,7 +13,7 @@ import { CardData } from "../formData/CardData";
 import RadioButtonsGroup from "./RadioButtonsGroup";
 import QueryConstants from "./QueryConstants";
 
-import { GET_ALL_LIST } from "../../../apollo/getCatalog";
+import { GET_ALL_LIST } from "../../../apollo/query/getCatalog";
 import { ICard, INewCardData } from "../../../types/cardType";
 
 interface IUpdateCard {

@@ -6,7 +6,7 @@ import MenuTitle from "../components/menuTitle/MenuTitle";
 import ReturnButton from "../components/returnButton/ReturnButton";
 
 import client from '../apollo/client';
-import { GET_ALL_MENU } from "../apollo/getCatalog";
+import { GET_ALL_MENU } from "../apollo/query/getMenu";
 import { IMenuList } from "../types/menuType";
 
 interface IMenuPage {

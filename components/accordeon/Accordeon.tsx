@@ -1,4 +1,4 @@
-import * as React from "react";
+import { useState } from "react";
 import { useRouter } from "next/router";
 
 import { Box } from "@mui/system";
@@ -13,8 +13,6 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandCircleDown";
 
 import AccordeonItem from "./AccordeonItem";
 import { IBody, IMenuList } from "../../types/menuType";
-
-import styles from "./Accordeon.module.scss";
 
 const Accordion = styled((props: AccordionProps) => (
     <MuiAccordion disableGutters elevation={0} square {...props} />
@@ -57,7 +55,7 @@ interface IAccordeon {
 }
 
 const Accordeon: React.FC<IAccordeon> = ({ menulist }) => {
-    const [expanded, setExpanded] = React.useState("");
+    const [expanded, setExpanded] = useState("");
     const router = useRouter();
 
     const handleChange = (panel: string) => (event: React.SyntheticEvent, isExpanded: boolean) => {
@@ -65,7 +63,7 @@ const Accordeon: React.FC<IAccordeon> = ({ menulist }) => {
     };
 
     return (
-        <Container maxWidth="md" className={styles.accordeon_block}>
+        <Container maxWidth="md" sx={{ marginTop: '50px', marginBottom: '100px' }}>
             {menulist.menu?.map((item, i) => (
                 <Accordion
                     key={i}

@@ -5,19 +5,19 @@ import {
     UPDATE_TEA_ITEM,
     UPDATE_JAM_ITEM,
     UPDATE_MILLS_ITEM,
-} from "../../../apollo/updateItem";
+} from "../../../apollo/mutation/updateItem";
 import {
     DELETE_COFFEE_ITEM,
     DELETE_TEA_ITEM,
     DELETE_JAM_ITEM,
     DELETE_MILLS_ITEM,
-} from "../../../apollo/deleteItem";
+} from "../../../apollo/mutation/deleteItem";
 import {
     INSERT_COFFEE_ITEM,
     INSERT_TEA_ITEM,
     INSERT_JAM_ITEM,
     INSERT_MILLS_ITEM,
-} from "../../../apollo/insertItem";
+} from "../../../apollo/mutation/insertItem";
 
 let QUERY_UPD: DocumentNode, QUERY_DEL: DocumentNode, QUERY_INS: DocumentNode;
 

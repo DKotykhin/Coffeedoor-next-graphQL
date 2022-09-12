@@ -11,19 +11,20 @@ import Spinner from "../spinner/Spinner";
 import FindText from "./FindText";
 import ButtonGroup from "./ButtonGroup";
 
-import { GET_ALL_LIST, GET_ALL_MENU } from "../../apollo/getCatalog";
-import { ICard } from "../../types/cardType";
-import { IMenu } from "../../types/menuType";
+import { GET_ALL_LIST } from "../../apollo/query/getCatalog";
+import { GET_ALL_MENU } from "../../apollo/query/getMenu";
+import { ICard, ICatalogList } from "../../types/cardType";
+import { IMenu, IMenuList } from "../../types/menuType";
 
 const AdminButtons: React.FC = () => {
     const [collection, setCollection] = useState('');
 
-    const [getList, { loading: cardLoading, data: cardData }] = useLazyQuery(GET_ALL_LIST, {
+    const [getList, { loading: cardLoading, data: cardData }] = useLazyQuery<ICatalogList>(GET_ALL_LIST, {
         onError: (data) => {
             toast.error(data.message);
         },
     });
-    const [getMenu, { loading: menuLoading, data: menuData }] = useLazyQuery(GET_ALL_MENU, {
+    const [getMenu, { loading: menuLoading, data: menuData }] = useLazyQuery<IMenuList>(GET_ALL_MENU, {
         onError: (data) => {
             toast.error(data.message);
         },
@@ -51,7 +52,7 @@ const AdminButtons: React.FC = () => {
                 <Spinner />
             ) : (
                 <>
-                    {collection === "coffeelist" &&
+                    {collection === "coffeelist" && cardData &&
                         <>
                             <FindText length={cardData.coffeelist.length} />
                             {cardData.coffeelist?.map((item: ICard) => (
@@ -59,7 +60,7 @@ const AdminButtons: React.FC = () => {
                             ))}
                         </>
                     }
-                    {collection === "jamlist" &&
+                    {collection === "jamlist" && cardData &&
                         <>
                             <FindText length={cardData.jamlist.length} />
                             {cardData.jamlist?.map((item: ICard) => (
@@ -67,7 +68,7 @@ const AdminButtons: React.FC = () => {
                             ))}
                         </>
                     }
-                    {collection === "tealist" &&
+                    {collection === "tealist" && cardData &&
                         <>
                             <FindText length={cardData.tealist.length} />
                             {cardData.tealist?.map((item: ICard) => (
@@ -75,7 +76,7 @@ const AdminButtons: React.FC = () => {
                             ))}
                         </>
                     }
-                    {collection === "millslist" &&
+                    {collection === "millslist" && cardData &&
                         <>
                             <FindText length={cardData.millslist.length} />
                             {cardData.millslist?.map((item: ICard) => (
@@ -83,7 +84,7 @@ const AdminButtons: React.FC = () => {
                             ))}
                         </>
                     }
-                    {collection === "menu" &&
+                    {collection === "menu" && menuData &&
                         <>
                             <FindText length={menuData.menu.length} />
                             {menuData.menu?.map((item: IMenu) => (
