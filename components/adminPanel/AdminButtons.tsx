@@ -37,6 +37,8 @@ const AdminButtons: React.FC = () => {
         } else getList()
     };
 
+    if (cardLoading || menuLoading) return <Spinner />
+
     return (
         <Container>
             <Typography sx={{ textAlign: "center", m: 3, fontSize: 22 }}>
@@ -48,52 +50,46 @@ const AdminButtons: React.FC = () => {
                 </Button>
             </Link>
             <ButtonGroup ListClick={ListClick} />
-            {(cardLoading || menuLoading) ? (
-                <Spinner />
-            ) : (
+            {cardData && collection === "coffeelist" &&
                 <>
-                    {collection === "coffeelist" && cardData &&
-                        <>
-                            <FindText length={cardData.coffeelist.length} />
-                            {cardData.coffeelist?.map((item: ICard) => (
-                                <AdminCard props={item} key={item._id} />
-                            ))}
-                        </>
-                    }
-                    {collection === "jamlist" && cardData &&
-                        <>
-                            <FindText length={cardData.jamlist.length} />
-                            {cardData.jamlist?.map((item: ICard) => (
-                                <AdminCard props={item} key={item._id} />
-                            ))}
-                        </>
-                    }
-                    {collection === "tealist" && cardData &&
-                        <>
-                            <FindText length={cardData.tealist.length} />
-                            {cardData.tealist?.map((item: ICard) => (
-                                <AdminCard props={item} key={item._id} />
-                            ))}
-                        </>
-                    }
-                    {collection === "millslist" && cardData &&
-                        <>
-                            <FindText length={cardData.millslist.length} />
-                            {cardData.millslist?.map((item: ICard) => (
-                                <AdminCard props={item} key={item._id} />
-                            ))}
-                        </>
-                    }
-                    {collection === "menu" && menuData &&
-                        <>
-                            <FindText length={menuData.menu.length} />
-                            {menuData.menu?.map((item: IMenu) => (
-                                <AdminMenu props={item} key={item._id} />
-                            ))}
-                        </>
-                    }
+                    <FindText length={cardData.coffeelist.length} />
+                    {cardData.coffeelist?.map((item: ICard) => (
+                        <AdminCard props={item} key={item._id} />
+                    ))}
                 </>
-            )}
+            }
+            {cardData && collection === "jamlist" &&
+                <>
+                    <FindText length={cardData.jamlist.length} />
+                    {cardData.jamlist?.map((item: ICard) => (
+                        <AdminCard props={item} key={item._id} />
+                    ))}
+                </>
+            }
+            {cardData && collection === "tealist" &&
+                <>
+                    <FindText length={cardData.tealist.length} />
+                    {cardData.tealist?.map((item: ICard) => (
+                        <AdminCard props={item} key={item._id} />
+                    ))}
+                </>
+            }
+            {cardData && collection === "millslist" &&
+                <>
+                    <FindText length={cardData.millslist.length} />
+                    {cardData.millslist?.map((item: ICard) => (
+                        <AdminCard props={item} key={item._id} />
+                    ))}
+                </>
+            }
+            {menuData && collection === "menu" &&
+                <>
+                    <FindText length={menuData.menu.length} />
+                    {menuData.menu?.map((item: IMenu) => (
+                        <AdminMenu props={item} key={item._id} />
+                    ))}
+                </>
+            }
         </Container>
     );
 }

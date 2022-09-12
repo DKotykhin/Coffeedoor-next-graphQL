@@ -20,7 +20,7 @@ import { UPDATE_MENU_ITEM } from "../../../apollo/mutation/updateItem";
 import { DELETE_MENU_ITEM } from "../../../apollo/mutation/deleteItem";
 import { INSERT_MENU_ITEM } from "../../../apollo/mutation/insertItem"
 
-import { IMenu } from "../../../types/menuType";
+import { IMenu, INewMenu } from "../../../types/menuType";
 
 interface IFormData {
     [key: string]: string
@@ -29,6 +29,9 @@ interface IUpdateMenu {
     cardData: IMenu,
     id: string | string[] | undefined
 }
+interface IVar {
+    _id: string | string[] | undefined
+}
 
 const UpdateMenu: React.FC<IUpdateMenu> = ({ cardData, id }) => {
     const [addItem, setAddItem] = useState(false);
@@ -36,7 +39,7 @@ const UpdateMenu: React.FC<IUpdateMenu> = ({ cardData, id }) => {
     const { handleSubmit, register } = useForm();
     const router = useRouter();
 
-    const [UpdateMenuItem, { loading: MenuLoadingUpd }] = useMutation(UPDATE_MENU_ITEM, {
+    const [UpdateMenuItem, { loading: MenuLoadingUpd }] = useMutation<IVar, {query: IVar, set: INewMenu}>(UPDATE_MENU_ITEM, {
         refetchQueries: [{ query: GET_ALL_MENU }],
         onCompleted: () => {
             router.push("/adminpanel");
@@ -46,7 +49,7 @@ const UpdateMenu: React.FC<IUpdateMenu> = ({ cardData, id }) => {
             toast.error(data.message);
         },
     });
-    const [DeleteMenuItem, { loading: MenuLoadingDel }] = useMutation(DELETE_MENU_ITEM, {
+    const [DeleteMenuItem, { loading: MenuLoadingDel }] = useMutation<IVar, {delete: IVar}>(DELETE_MENU_ITEM, {
         refetchQueries: [{ query: GET_ALL_MENU }],
         onCompleted: () => {
             router.push("/adminpanel");
@@ -56,7 +59,7 @@ const UpdateMenu: React.FC<IUpdateMenu> = ({ cardData, id }) => {
             toast.error(data.message);
         },
     });
-    const [InsertMenuItem, { loading: MenuLoadingIns }] = useMutation(INSERT_MENU_ITEM, {
+    const [InsertMenuItem, { loading: MenuLoadingIns }] = useMutation<IVar, {insert: INewMenu}>(INSERT_MENU_ITEM, {
         refetchQueries: [{ query: GET_ALL_MENU }],
         onCompleted: () => {
             router.push("/adminpanel");
@@ -68,7 +71,7 @@ const UpdateMenu: React.FC<IUpdateMenu> = ({ cardData, id }) => {
     });
 
     const onSubmit = (data: IFormData) => {
-        const newData = MenuData(data);
+        const newData: INewMenu = MenuData(data);
         // console.log(newData);
         const edit = {
             query: { _id: id },

@@ -25,6 +25,10 @@ interface IFormData {
     [key: string]: string
 }
 
+interface IVar {
+    _id: string | string[] | undefined
+}
+
 const UpdateCard: React.FC<IUpdateCard> = ({ cardData, id }) => {
     const [add, setAdd] = useState(false);
     const { handleSubmit, register } = useForm();
@@ -32,7 +36,7 @@ const UpdateCard: React.FC<IUpdateCard> = ({ cardData, id }) => {
 
     const { QUERY_UPD, QUERY_DEL, QUERY_INS } = QueryConstants(cardData.__typename)
 
-    const [UpdateItem, { loading: LoadingUpd }] = useMutation(QUERY_UPD, {
+    const [UpdateItem, { loading: LoadingUpd }] = useMutation<IVar, {query: IVar, set: INewCardData}>(QUERY_UPD, {
         refetchQueries: [{ query: GET_ALL_LIST }],
         onCompleted: () => {
             router.push("/adminpanel");
@@ -42,7 +46,7 @@ const UpdateCard: React.FC<IUpdateCard> = ({ cardData, id }) => {
             toast.error(data.message);
         },
     });
-    const [DeleteItem, { loading: LoadingDel }] = useMutation(QUERY_DEL, {
+    const [DeleteItem, { loading: LoadingDel }] = useMutation<IVar, {delete: IVar}>(QUERY_DEL, {
         refetchQueries: [{ query: GET_ALL_LIST }],
         onCompleted: () => {
             router.push("/adminpanel");
@@ -52,7 +56,7 @@ const UpdateCard: React.FC<IUpdateCard> = ({ cardData, id }) => {
             toast.error(data.message);
         },
     });
-    const [InsertItem, { loading: LoadingIns }] = useMutation(QUERY_INS, {
+    const [InsertItem, { loading: LoadingIns }] = useMutation<IVar, {insert: INewCardData}>(QUERY_INS, {
         refetchQueries: [{ query: GET_ALL_LIST }],
         onCompleted: () => {
             router.push("/adminpanel");
