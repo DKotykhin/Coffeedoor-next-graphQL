@@ -16,8 +16,7 @@ interface IItemList {
     props: ICard[];
     id: string;
     title: string;
-    subtitle: string;
-    showfilter: boolean;
+    subtitle: string;    
     filterArray?: IFilter[];
     i: number
 }
@@ -26,8 +25,7 @@ const ItemList: React.FC<IItemList> = ({
     props,
     id,
     title,
-    subtitle,
-    showfilter,
+    subtitle,    
     filterArray,
     i,
 }) => {
@@ -47,7 +45,7 @@ const ItemList: React.FC<IItemList> = ({
             <Typography className={styles.item_list_subtitle}>
                 {subtitle}
             </Typography>
-            {showfilter && (
+            {filterArray && (
                 <FilterItems
                     onSelect={onSelectSort}
                     quantity={list ? list.length : null}

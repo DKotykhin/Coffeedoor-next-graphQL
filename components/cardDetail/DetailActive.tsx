@@ -1,6 +1,4 @@
 import { useState } from "react";
-
-// import { useAppDispatch } from "../../store/hook";
 import useTranslation from "next-translate/useTranslation";
 
 import { Button, Typography } from "@mui/material";
@@ -8,7 +6,8 @@ import { Button, Typography } from "@mui/material";
 import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 
-// import { basketAddItems } from "../../store/basketSlice";
+import { useAppDispatch } from "../../store/hook";
+import { basketAddItems } from "../../store/basketSlice";
 import { IBody, ICard } from "../../types/cardType";
 import { IBasket } from "../../types/basketType";
 
@@ -23,7 +22,7 @@ const DetailActive: React.FC<IDetailActive> = ({ props, body, closeModal }) => {
     const { _id, price, weight } = props;
     const { title, name } = body;
     const [quantity, setQuantity] = useState<number>(1);
-    // const dispatch = useAppDispatch();
+    const dispatch = useAppDispatch();
     let { t } = useTranslation("card");
 
     const handleDecrement = () => {
@@ -45,7 +44,7 @@ const DetailActive: React.FC<IDetailActive> = ({ props, body, closeModal }) => {
             _id
         };
         // console.log(fullData);
-        // dispatch(basketAddItems(fullData));
+        dispatch(basketAddItems(fullData));
     };
 
     return (

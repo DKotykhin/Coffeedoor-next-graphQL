@@ -35,16 +35,14 @@ const Catalog: React.FC<ICatalog> = ({ cataloglist }) => {
     return (
         <>
             <ItemList
-                props={cataloglist?.coffeelist}
-                showfilter={false}
+                props={cataloglist?.coffeelist}                
                 i={i}                
                 id={"coffee_list"}
                 title={t("coffee_title")}
                 subtitle={t("coffee_subtitle")}
             />
             <ItemList
-                props={cataloglist?.tealist}
-                showfilter={true}
+                props={cataloglist?.tealist}                
                 i={i}
                 filterArray={teaFilter}
                 id={"tea_list"}
@@ -52,16 +50,14 @@ const Catalog: React.FC<ICatalog> = ({ cataloglist }) => {
                 subtitle={t("tea_subtitle")}
             />
             <ItemList
-                props={cataloglist?.jamlist}
-                showfilter={false}
+                props={cataloglist?.jamlist}                
                 i={i}                
                 id={"jam_list"}
                 title={t("jam_title")}
                 subtitle={t("jam_subtitle")}
             />
             <ItemList
-                props={cataloglist?.millslist}
-                showfilter={false}
+                props={cataloglist?.millslist}                
                 i={i}                
                 id={"mills_list"}
                 title={t("mills_title")}
