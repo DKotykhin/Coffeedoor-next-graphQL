@@ -7,8 +7,7 @@ import { toast } from "react-toastify";
 
 import { Container, Box, Button } from "@mui/material";
 
-import TextInput from "../inputs/TextInput";
-import RadioButtonInput from "../inputs/RadioButtonInput";
+import {TextInput, RadioButtonInput} from "../inputs";
 import MenuItemBlock from "./MenuItemBlock";
 import MenuAddNewItem from "./MenuAddNewItem";
 import { MenuData } from "../formData/MenuData";

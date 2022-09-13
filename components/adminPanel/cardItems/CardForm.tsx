@@ -1,9 +1,7 @@
 import { FieldValues, UseFormRegister } from "react-hook-form";
 
 import CardOneLangInputs from "./CardOneLangInputs";
-import TextInput from "../inputs/TextInput";
-import TextFieldInput from "../inputs/TextFieldInput";
-import RadioButtonInput from "../inputs/RadioButtonInput";
+import { TextInput, TextFieldInput, RadioButtonInput } from "../inputs";
 
 import { ICard } from "../../../types/cardType";
 

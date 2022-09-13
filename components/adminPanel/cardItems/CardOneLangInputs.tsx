@@ -2,9 +2,7 @@ import { FieldValues, UseFormRegister } from "react-hook-form";
 
 import { Box, Paper, Typography } from "@mui/material";
 
-import TextInput from "../inputs/TextInput";
-import SortFieldInput from "../inputs/SortFieldInput";
-import TextFieldInput from "../inputs/TextFieldInput";
+import { TextInput, TextFieldInput, SortFieldInput } from "../inputs";
 
 import { IBody } from "../../../types/cardType";
 interface ICardLang {

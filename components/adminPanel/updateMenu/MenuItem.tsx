@@ -3,7 +3,7 @@ import { FieldValues, UseFormRegister } from "react-hook-form";
 import { Box, Paper } from "@mui/material";
 import { IBody } from "../../../types/menuType";
 
-import TextInput from "../inputs/TextInput";
+import { TextInput } from "../inputs";
 
 interface IMenuItem {
     item: IBody;
@@ -13,7 +13,7 @@ interface IMenuItem {
 }
 
 const MenuItem: React.FC<IMenuItem> = ({ item, register, j, k }) => {
-    
+
     return (
         <Box sx={{ my: 1 }}>
             <Paper elevation={4} sx={{ p: 1 }}>

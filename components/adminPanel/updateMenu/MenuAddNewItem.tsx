@@ -2,7 +2,7 @@ import { FieldValues, UseFormRegister } from "react-hook-form";
 
 import { Box, Typography, Paper } from "@mui/material";
 
-import TextInput from "../inputs/TextInput";
+import { TextInput } from "../inputs";
 
 interface IMenuItemNew {
     register: UseFormRegister<FieldValues>,
