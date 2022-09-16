@@ -2,9 +2,8 @@ import { useRouter } from "next/router";
 
 import { Container, Button, Box } from "@mui/material";
 
-import CardText from "./cardItems/CardText";
-import MenuOneLangTitle from "./menuItems/MenuOneLangTitle";
-import MenuOneLangBody from "./menuItems/MenuOneLangBody";
+import { CardText } from "./cardItems";
+import { MenuOneLangBody, MenuOneLangTitle } from "./menuItems";
 
 import { IMenu } from "../../types/menuType";
 

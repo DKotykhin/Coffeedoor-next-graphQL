@@ -10,7 +10,7 @@ import { Container, Box, Button } from "@mui/material";
 import {TextInput, RadioButtonInput} from "../inputs";
 import MenuItemBlock from "./MenuItemBlock";
 import MenuAddNewItem from "./MenuAddNewItem";
-import { MenuData } from "../formData/MenuData";
+import { MenuData } from "../formData";
 import RadioButtonsGroup from "../updateCard/RadioButtonsGroup";
 import Spinner from "../../spinner/Spinner";
 

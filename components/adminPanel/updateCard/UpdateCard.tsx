@@ -8,8 +8,8 @@ import { useMutation } from '@apollo/client';
 import { Container, Box, Button } from "@mui/material";
 
 import Spinner from "../../spinner/Spinner";
-import CardForm from "../cardItems/CardForm";
-import { CardData } from "../formData/CardData";
+import { CardForm } from "../cardItems";
+import { CardData } from "../formData";
 import RadioButtonsGroup from "./RadioButtonsGroup";
 import QueryConstants from "./QueryConstants";
 
@@ -36,7 +36,7 @@ const UpdateCard: React.FC<IUpdateCard> = ({ cardData, id }) => {
 
     const { QUERY_UPD, QUERY_DEL, QUERY_INS } = QueryConstants(cardData.__typename)
 
-    const [UpdateItem, { loading: LoadingUpd }] = useMutation<IVar, {query: IVar, set: INewCardData}>(QUERY_UPD, {
+    const [UpdateItem, { loading: LoadingUpd }] = useMutation<IVar, { query: IVar, set: INewCardData }>(QUERY_UPD, {
         refetchQueries: [{ query: GET_ALL_LIST }],
         onCompleted: () => {
             router.push("/adminpanel");
@@ -46,7 +46,7 @@ const UpdateCard: React.FC<IUpdateCard> = ({ cardData, id }) => {
             toast.error(data.message);
         },
     });
-    const [DeleteItem, { loading: LoadingDel }] = useMutation<IVar, {delete: IVar}>(QUERY_DEL, {
+    const [DeleteItem, { loading: LoadingDel }] = useMutation<IVar, { delete: IVar }>(QUERY_DEL, {
         refetchQueries: [{ query: GET_ALL_LIST }],
         onCompleted: () => {
             router.push("/adminpanel");
@@ -56,7 +56,7 @@ const UpdateCard: React.FC<IUpdateCard> = ({ cardData, id }) => {
             toast.error(data.message);
         },
     });
-    const [InsertItem, { loading: LoadingIns }] = useMutation<IVar, {insert: INewCardData}>(QUERY_INS, {
+    const [InsertItem, { loading: LoadingIns }] = useMutation<IVar, { insert: INewCardData }>(QUERY_INS, {
         refetchQueries: [{ query: GET_ALL_LIST }],
         onCompleted: () => {
             router.push("/adminpanel");

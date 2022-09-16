@@ -2,8 +2,7 @@ import { useRouter } from "next/router";
 
 import { Container, Typography, Box, Button } from "@mui/material";
 
-import CardText from "./cardItems/CardText";
-import CardOneLangBlock from "./cardItems/CardOneLangBlock";
+import { CardText, CardOneLangBlock } from "./cardItems";
 
 import { ICard } from "../../types/cardType";
 
@@ -15,7 +14,7 @@ const AdminCard: React.FC<IAdminCard> = ({ props }) => {
     const router = useRouter();
 
     const editorClick = (id: string) => {
-        router.push(`/adminpanel/${id}`);        
+        router.push(`/adminpanel/${id}`);
     };
 
     return (
