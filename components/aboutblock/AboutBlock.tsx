@@ -50,7 +50,7 @@ interface IPhotoData {
     img: string,
     title: string,
     size?: boolean,
-    portrait?: boolean
+    portrait: boolean
 }
 
 const AboutBlock: React.FC = () => {

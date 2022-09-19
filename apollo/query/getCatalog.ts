@@ -72,6 +72,10 @@ export const GET_ALL_LIST: DocumentNode = gql `
                 additional_text_1
                 additional_text_2
                 additional_list
+                sort {
+                    key
+                    value
+                }
             }
             _id
             card_img

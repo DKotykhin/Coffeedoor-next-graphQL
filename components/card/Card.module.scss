@@ -7,7 +7,7 @@
         font-weight: 700;
         padding-top: 8px;
         padding-bottom: 16px;
-        min-height: 80px;
+        min-height: 95px;
         @media (max-width: 600px) {
             font-size: 19px;
         }
@@ -21,9 +21,9 @@
         }
     }
     .catalog_item_desc {
-        min-height: 80px;
+        min-height: 85px;
         @media (max-width: 600px) {
-            min-height: 100px;
+            min-height: 97px;
         }
         p {
             font-size: 14px;

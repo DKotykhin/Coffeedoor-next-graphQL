@@ -12,8 +12,7 @@ interface IDetailSwipeImage {
     alt: string
 }
 
-const DetailSwipeImage: React.FC<IDetailSwipeImage> = ({ img, alt }) => {
-    console.log(img)
+const DetailSwipeImage: React.FC<IDetailSwipeImage> = ({ img, alt }) => {    
     return (
         <Swiper
             effect={"cube"}
