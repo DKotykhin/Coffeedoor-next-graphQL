@@ -1,64 +1,46 @@
 import useTranslation from "next-translate/useTranslation";
-import { useRouter } from "next/router";
 
 import ItemList from "./ItemList";
-import { teaFilter_ua, teaFilter_ru, teaFilter_en } from "./filterConstants";
 import { ICatalogList, IFilter } from "../../types/cardType";
 
 interface ICatalog {
     cataloglist: ICatalogList
 }
 
-const Catalog: React.FC<ICatalog> = ({ cataloglist }) => {
-    const router = useRouter();
+const Catalog: React.FC<ICatalog> = ({ cataloglist }) => {    
     let { t } = useTranslation("cataloglist");
-    let teaFilter: IFilter[], i: number;
 
-    switch (router.locale) {
-        case "ua":
-            teaFilter = teaFilter_ua;
-            i = 0;
-            break;
-        case "ru":
-            teaFilter = teaFilter_ru;
-            i = 1;
-            break;
-        case "en":
-            teaFilter = teaFilter_en;
-            i = 2;
-            break;
-        default:
-            teaFilter = teaFilter_ua;
-            i = 0;
-    }
+    const teaFilter: IFilter[] = [
+        { key: t("buttonA"), value: t("valueA") },
+        { key: t("buttonB"), value: t("valueB") },
+        { key: t("buttonC"), value: t("valueC") },
+        { key: t("buttonD"), value: t("valueD") },
+        { key: t("buttonE"), value: t("valueE") },
+    ];
 
     return (
         <>
             <ItemList
-                props={cataloglist?.coffeelist}                
-                i={i}                
+                props={cataloglist?.coffeelist}
                 id={"coffee_list"}
                 title={t("coffee_title")}
                 subtitle={t("coffee_subtitle")}
             />
             <ItemList
-                props={cataloglist?.tealist}                
-                i={i}
+                props={cataloglist?.tealist}
                 filterArray={teaFilter}
                 id={"tea_list"}
                 title={t("tea_title")}
                 subtitle={t("tea_subtitle")}
             />
             <ItemList
-                props={cataloglist?.jamlist}                
-                i={i}                
+                props={cataloglist?.jamlist}
                 id={"jam_list"}
                 title={t("jam_title")}
                 subtitle={t("jam_subtitle")}
             />
             <ItemList
-                props={cataloglist?.millslist}                
-                i={i}                
+                props={cataloglist?.millslist}
                 id={"mills_list"}
                 title={t("mills_title")}
                 subtitle={t("mills_subtitle")}

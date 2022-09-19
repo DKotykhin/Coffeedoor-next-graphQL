@@ -1,10 +1,13 @@
 import { useState } from "react";
+import { useRouter } from "next/router";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper";
 import { motion, AnimatePresence } from "framer-motion";
+
 import { Container, Typography } from "@mui/material";
 
 import Card from "../card/Card";
+
 import FilterItems from "../filters/FilterItems";
 import { ICard, IFilter } from "../../types/cardType";
 
@@ -17,8 +20,7 @@ interface IItemList {
     id: string;
     title: string;
     subtitle: string;    
-    filterArray?: IFilter[];
-    i: number
+    filterArray?: IFilter[]    
 }
 
 const ItemList: React.FC<IItemList> = ({
@@ -26,10 +28,25 @@ const ItemList: React.FC<IItemList> = ({
     id,
     title,
     subtitle,    
-    filterArray,
-    i,
+    filterArray    
 }) => {
     const [list, setList] = useState(props);
+    const router = useRouter();
+
+    let i: number;
+    switch (router.locale) {
+        case "ua":            
+            i = 0;
+            break;
+        case "ru":            
+            i = 1;
+            break;
+        case "en":            
+            i = 2;
+            break;
+        default:            
+            i = 0;
+    }
 
     const onSelectSort = (sort: string) => {
         let data = props;
@@ -69,7 +86,7 @@ const ItemList: React.FC<IItemList> = ({
                 modules={[Navigation]}
             >
                 <AnimatePresence initial={false}>
-                    {list?.map((item) => (
+                    {list?.map((item: ICard) => (
                         <SwiperSlide key={item._id}>
                             <motion.div
                                 initial={{ opacity: 0 }}
