@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import { GetStaticProps, NextPage } from 'next';
+import { GetServerSideProps, NextPage } from 'next';
 
 import NavDrawer from "../components/drawer/Drawer";
 import FirstBlock from "../components/firstBlock/FirstBlock";
@@ -50,7 +50,7 @@ const Home: NextPage<ICatalog> = ({ cataloglist }) => {
 
 export default Home;
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getServerSideProps: GetServerSideProps = async () => {
     const { data } = await client.query({
         query: GET_ALL_LIST,
         variables: {
