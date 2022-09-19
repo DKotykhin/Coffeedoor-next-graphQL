@@ -2,7 +2,7 @@
 .catalog_item {
     margin: 5px;
     border-radius: 10px;
-    &_name {
+    .catalog_item_name {
         font-size: 24px;
         font-weight: 700;
         padding-top: 8px;

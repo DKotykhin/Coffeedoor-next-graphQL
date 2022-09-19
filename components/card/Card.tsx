@@ -51,6 +51,8 @@ const CatalogCard: React.FC<ICatalogCard> = ({ props, i }) => {
                     alt={name}
                     width={350}
                     height={350}
+                    placeholder='blur'
+                    blurDataURL={`/goodsimages/${card_img}`}
                 />
                 <CardContent>
                     <Typography className={styles.catalog_item_name}>
