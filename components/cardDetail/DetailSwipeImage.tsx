@@ -26,7 +26,7 @@ const DetailSwipeImage: React.FC<IDetailSwipeImage> = ({ img, alt }) => {
             pagination={true}
             modules={[EffectCube, Pagination]}
         >
-            {img?.map((item, i) => (
+            {img?.map((item: string, i: number) => (
                 <SwiperSlide key={i}>
                     <Image
                         src={

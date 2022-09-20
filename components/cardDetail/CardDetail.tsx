@@ -105,13 +105,13 @@ const CardDetail: React.FC<ICardDetail> = ({
                     <Typography sx={{ mt: 2, mb: 2 }} variant="body2">
                         {description}
                     </Typography>
-                    {additional_text_1?.map((item, i) => (
+                    {additional_text_1?.map((item: string, i: number) => (
                         <Typography key={i} variant="body2">
                             {item}
                         </Typography>
                     ))}
                     <List className="list">
-                        {additional_list?.map((item, i) => (
+                        {additional_list?.map((item: string, i: number) => (
                             <ListItem disablePadding key={i}>
                                 <ListItemIcon>
                                     <DoneIcon />
@@ -122,7 +122,7 @@ const CardDetail: React.FC<ICardDetail> = ({
                             </ListItem>
                         ))}
                     </List>
-                    {additional_text_2?.map((item, i) => (
+                    {additional_text_2?.map((item: string, i: number) => (
                         <Typography key={i} variant="body2" sx={{ mt: 1 }}>
                             {item}
                         </Typography>

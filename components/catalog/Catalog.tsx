@@ -11,11 +11,11 @@ const Catalog: React.FC<ICatalog> = ({ cataloglist }) => {
     let { t } = useTranslation("cataloglist");
 
     const teaFilter: IFilter[] = [
-        { key: t("buttonA"), value: t("valueA") },
-        { key: t("buttonB"), value: t("valueB") },
-        { key: t("buttonC"), value: t("valueC") },
-        { key: t("buttonD"), value: t("valueD") },
-        { key: t("buttonE"), value: t("valueE") },
+        { button: t("buttonA"), value: t("valueA") },
+        { button: t("buttonB"), value: t("valueB") },
+        { button: t("buttonC"), value: t("valueC") },
+        { button: t("buttonD"), value: t("valueD") },
+        { button: t("buttonE"), value: t("valueE") },
     ];
 
     return (

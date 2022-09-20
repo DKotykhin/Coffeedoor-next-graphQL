@@ -57,7 +57,7 @@ const FilterItems: React.FC<IFilterItems> = ({ onSelect, quantity, filterArray }
                     >
                         {filterArray?.map((item) => (
                             <Badge
-                                key={item.key}
+                                key={item.button}
                                 badgeContent={
                                     item.value === filteredItem ? quantity : 0
                                 }
@@ -71,7 +71,7 @@ const FilterItems: React.FC<IFilterItems> = ({ onSelect, quantity, filterArray }
                                             ? "primary"
                                             : "default"
                                     }
-                                    label={item.key}
+                                    label={item.button}
                                     onClick={() => handleSelect(item.value)}
                                 />
                             </Badge>
