@@ -13,12 +13,12 @@ import { ICard } from "../../types/cardType";
 import styles from "./Card.module.scss";
 
 interface ICatalogCard {
-    props: ICard;
+    item: ICard;
     i: number
 }
 
-const CatalogCard: React.FC<ICatalogCard> = ({ props, i }) => {
-    const { _id, body, price, weight, card_img, order } = props;
+const CatalogCard: React.FC<ICatalogCard> = ({ item, i }) => {
+    const { _id, body, price, weight, card_img, order } = item;
     const { title, name, description, sort } = body[i];
 
     const [open, setOpen] = useState(false);
@@ -36,7 +36,7 @@ const CatalogCard: React.FC<ICatalogCard> = ({ props, i }) => {
     return (
         <>
             <CardDetail
-                props={props}
+                item={item}
                 body={body[i]}
                 openModal={open}
                 closeModal={closeModal}

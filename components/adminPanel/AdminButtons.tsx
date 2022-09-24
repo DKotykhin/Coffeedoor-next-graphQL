@@ -54,7 +54,7 @@ const AdminButtons: React.FC = () => {
                 <>
                     <FindText length={cardData.coffeelist.length} />
                     {cardData.coffeelist?.map((item: ICard) => (
-                        <AdminCard props={item} key={item._id} />
+                        <AdminCard item={item} key={item._id} />
                     ))}
                 </>
             }
@@ -62,7 +62,7 @@ const AdminButtons: React.FC = () => {
                 <>
                     <FindText length={cardData.jamlist.length} />
                     {cardData.jamlist?.map((item: ICard) => (
-                        <AdminCard props={item} key={item._id} />
+                        <AdminCard item={item} key={item._id} />
                     ))}
                 </>
             }
@@ -70,7 +70,7 @@ const AdminButtons: React.FC = () => {
                 <>
                     <FindText length={cardData.tealist.length} />
                     {cardData.tealist?.map((item: ICard) => (
-                        <AdminCard props={item} key={item._id} />
+                        <AdminCard item={item} key={item._id} />
                     ))}
                 </>
             }
@@ -78,7 +78,7 @@ const AdminButtons: React.FC = () => {
                 <>
                     <FindText length={cardData.millslist.length} />
                     {cardData.millslist?.map((item: ICard) => (
-                        <AdminCard props={item} key={item._id} />
+                        <AdminCard item={item} key={item._id} />
                     ))}
                 </>
             }
@@ -86,7 +86,7 @@ const AdminButtons: React.FC = () => {
                 <>
                     <FindText length={menuData.menu.length} />
                     {menuData.menu?.map((item: IMenu) => (
-                        <AdminMenu props={item} key={item._id} />
+                        <AdminMenu item={item} key={item._id} />
                     ))}
                 </>
             }

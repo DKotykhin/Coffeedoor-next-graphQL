@@ -8,10 +8,10 @@ import { MenuOneLangBody, MenuOneLangTitle } from "./menuItems";
 import { IMenu } from "../../types/menuType";
 
 interface IMenuCard {
-    props: IMenu
+    item: IMenu
 }
 
-const AdminMenu: React.FC<IMenuCard> = ({ props }) => {
+const AdminMenu: React.FC<IMenuCard> = ({ item }) => {
     const router = useRouter();
 
     const editorClick = (id: string) => {
@@ -20,20 +20,20 @@ const AdminMenu: React.FC<IMenuCard> = ({ props }) => {
 
     return (
         <Container sx={{ my: 2, border: "solid 2px #898989", borderRadius: 5 }}>
-            <MenuOneLangTitle title={props.ua.title} />
-            {props.ua.body?.map((item, i) => (
+            <MenuOneLangTitle title={item.ua.title} />
+            {item.ua.body?.map((item, i) => (
                 <Box key={i} sx={{ my: 1 }}>
                     <MenuOneLangBody item={item} />
                 </Box>
             ))}
-            <MenuOneLangTitle title={props.ru.title} />
-            {props.ru.body?.map((item, i) => (
+            <MenuOneLangTitle title={item.ru.title} />
+            {item.ru.body?.map((item, i) => (
                 <Box key={i} sx={{ my: 1 }}>
                     <MenuOneLangBody item={item} />
                 </Box>
             ))}
-            <MenuOneLangTitle title={props.en.title} />
-            {props.en.body?.map((item, i) => (
+            <MenuOneLangTitle title={item.en.title} />
+            {item.en.body?.map((item, i) => (
                 <Box key={i} sx={{ my: 1 }}>
                     <MenuOneLangBody item={item} />
                 </Box>
@@ -41,12 +41,12 @@ const AdminMenu: React.FC<IMenuCard> = ({ props }) => {
 
             <CardText
                 label={"Приховати картку:"}
-                value={props.hide ? "Так" : "Ні"}
+                value={item.hide ? "Так" : "Ні"}
             />
-            {props.position && (
-                <CardText label={"Позиція:"} value={props.position} />
+            {item.position && (
+                <CardText label={"Позиція:"} value={item.position} />
             )}
-            <Button sx={{ m: 2 }} onClick={() => editorClick(props._id)}>
+            <Button sx={{ m: 2 }} onClick={() => editorClick(item._id)}>
                 Редагувати
             </Button>
         </Container>

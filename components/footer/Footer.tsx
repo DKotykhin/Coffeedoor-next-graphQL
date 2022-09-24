@@ -20,7 +20,7 @@ const Footer: React.FC = () => {
     let { t } = useTranslation("common");
 
     return (
-        <div id="footer_block" className={styles.footer_block}>
+        <Box id="footer_block" className={styles.footer_block}>
             <Box>
                 <Link href={SocialMedia.FACEBOOK}>
                     <FacebookIcon className={styles.footer_icon} />
@@ -49,7 +49,7 @@ const Footer: React.FC = () => {
                     {"e-mail: coffeedoor.kh@gmail.com"}
                 </Link>
             </Box>
-        </div>
+        </Box>
     );
 };
 

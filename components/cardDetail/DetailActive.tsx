@@ -13,13 +13,13 @@ import { IBasket } from "../../types/basketType";
 
 import styles from "./CardDetail.module.scss";
 interface IDetailActive {
-    props: ICard;
+    item: ICard;
     body: IBody;
     closeModal: () => void;
 }
 
-const DetailActive: React.FC<IDetailActive> = ({ props, body, closeModal }) => {
-    const { _id, price, weight } = props;
+const DetailActive: React.FC<IDetailActive> = ({ item, body, closeModal }) => {
+    const { _id, price, weight } = item;
     const { title, name } = body;
     const [quantity, setQuantity] = useState<number>(1);
     const dispatch = useAppDispatch();
@@ -42,8 +42,7 @@ const DetailActive: React.FC<IDetailActive> = ({ props, body, closeModal }) => {
             weight,
             quantity,
             _id
-        };
-        // console.log(fullData);
+        };        
         dispatch(basketAddItems(fullData));
     };
 

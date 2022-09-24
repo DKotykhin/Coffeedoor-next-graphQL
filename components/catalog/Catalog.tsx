@@ -21,26 +21,26 @@ const Catalog: React.FC<ICatalog> = ({ cataloglist }) => {
     return (
         <>
             <ItemList
-                props={cataloglist?.coffeelist}
+                itemList={cataloglist?.coffeelist}
                 id={"coffee_list"}
                 title={t("coffee_title")}
                 subtitle={t("coffee_subtitle")}
             />
             <ItemList
-                props={cataloglist?.tealist}
+                itemList={cataloglist?.tealist}
                 filterArray={teaFilter}
                 id={"tea_list"}
                 title={t("tea_title")}
                 subtitle={t("tea_subtitle")}
             />
             <ItemList
-                props={cataloglist?.jamlist}
+                itemList={cataloglist?.jamlist}
                 id={"jam_list"}
                 title={t("jam_title")}
                 subtitle={t("jam_subtitle")}
             />
             <ItemList
-                props={cataloglist?.millslist}
+                itemList={cataloglist?.millslist}
                 id={"mills_list"}
                 title={t("mills_title")}
                 subtitle={t("mills_subtitle")}

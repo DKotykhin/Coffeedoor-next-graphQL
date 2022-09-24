@@ -7,10 +7,10 @@ import { CardText, CardOneLangBlock } from "./cardItems";
 import { ICard } from "../../types/cardType";
 
 interface IAdminCard {
-    props: ICard
+    item: ICard
 }
 
-const AdminCard: React.FC<IAdminCard> = ({ props }) => {
+const AdminCard: React.FC<IAdminCard> = ({ item }) => {
     const router = useRouter();
 
     const editorClick = (id: string) => {
@@ -19,39 +19,39 @@ const AdminCard: React.FC<IAdminCard> = ({ props }) => {
 
     return (
         <Container sx={{ my: 2, border: "solid 2px #898989", borderRadius: 5 }}>
-            {props.body.map((item, i) => (
+            {item.body.map((item, i) => (
                 <CardOneLangBlock key={i} item={item} />
             ))}
             <Box>
                 <Typography component="span" variant="body2">
                     {"Основне фото: "}
                 </Typography>
-                <Typography sx={{ ml: 3 }}>{props.card_img}</Typography>
+                <Typography sx={{ ml: 3 }}>{item.card_img}</Typography>
             </Box>
             <Box>
                 <Typography component="span" variant="body2">
                     {"Детальні фото: "}
                 </Typography>
-                {props.list_img?.map((item, i) => (
+                {item.list_img?.map((item, i) => (
                     <Typography key={i} sx={{ ml: 3 }}>
                         {item}
                     </Typography>
                 ))}
             </Box>
-            {props.weight && <CardText label={"Вага:"} value={props.weight} />}
-            <CardText label={"Ціна:"} value={props.price} />
-            {!!props.position && (
-                <CardText label={"Позиція:"} value={props.position} />
+            {item.weight && <CardText label={"Вага:"} value={item.weight} />}
+            <CardText label={"Ціна:"} value={item.price} />
+            {!!item.position && (
+                <CardText label={"Позиція:"} value={item.position} />
             )}
             <CardText
                 label={"Під замовлення:"}
-                value={props.order ? "Так" : "Ні"}
+                value={item.order ? "Так" : "Ні"}
             />
             <CardText
                 label={"Приховати картку:"}
-                value={props.hide ? "Так" : "Ні"}
+                value={item.hide ? "Так" : "Ні"}
             />
-            <Button sx={{ m: 2 }} onClick={() => editorClick(props._id)}>
+            <Button sx={{ m: 2 }} onClick={() => editorClick(item._id)}>
                 Редагувати
             </Button>
         </Container>

@@ -11,7 +11,6 @@ import {
     FormControlLabel,
     FormLabel,
 } from "@mui/material";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 import classNames from "classnames";
 
@@ -19,14 +18,6 @@ import { FormValidation } from "./BasketFormValidation";
 
 import styles from "./Basketform.module.scss";
 import { IFormData } from "../../types/basketType";
-
-const theme = createTheme({
-    palette: {
-        primary: {
-            main: "#00a1b6",
-        },
-    },
-});
 
 interface IBasketForm {
     onSubmit: (data: IFormData) => void
@@ -41,117 +32,111 @@ const BasketForm: React.FC<IBasketForm> = ({ onSubmit }) => {
     } = useForm<IFormData>(FormValidation);
 
     return (
-        <>
-            <Box
-                onSubmit={handleSubmit(onSubmit)}
-                className={styles.form}
-                component="form"
-                noValidate
-                autoComplete="off"
+        <Box
+            onSubmit={handleSubmit(onSubmit)}
+            className={styles.form}
+            component="form"
+            noValidate
+            autoComplete="off"
+        >
+            <InputLabel
+                htmlFor="name"
+                className={classNames(styles.title, styles.mb)}
             >
-                <ThemeProvider theme={theme}>
-                    <InputLabel
-                        htmlFor="name"
-                        className={classNames(styles.title, styles.mb)}
-                    >
-                        {t("name")}
-                    </InputLabel>
-                    <Controller
-                        name="name"
-                        control={control}
-                        render={({ field }) => (
-                            <Input {...field} sx={{ width: "100%" }} />
-                        )}
-                    />
-                    <Typography className={styles.error}>
-                        {errors.name?.message}
-                    </Typography>
-                    <InputLabel
-                        htmlFor="phone"
-                        className={classNames(
-                            styles.title,
-                            styles.mb,
-                            styles.mt
-                        )}
-                    >
-                        {t("phone")}
-                    </InputLabel>
-                    <Controller
-                        name="phone"
-                        control={control}
-                        render={({ field }) => (
-                            <Input {...field} sx={{ width: "100%" }} />
-                        )}
-                    />
-                    <Typography className={styles.error}>
-                        {errors.phone?.message}
-                    </Typography>
-                    <Controller
-                        name="delivery"
-                        control={control}
-                        render={({ field }) => (
-                            <FormControl {...field}>
-                                <FormLabel
-                                    className={classNames(
-                                        styles.title,
-                                        styles.mb,
-                                        styles.mt
-                                    )}
-                                >
-                                    {t("delivery")}
-                                </FormLabel>
-                                <RadioGroup
-                                // defaultValue="забрати в кавярні"
-                                >
-                                    <FormControlLabel
-                                        value="забрати в кав'ярні"
-                                        control={<Radio />}
-                                        label={t("var_1")}
-                                    />
-                                    <FormControlLabel
-                                        value="доставка перевізником"
-                                        control={<Radio />}
-                                        label={t("var_2")}
-                                    />
-                                </RadioGroup>
-                            </FormControl>
-                        )}
-                    />
-                    <Typography className={styles.error}>
-                        {errors.delivery?.message}
-                    </Typography>
-                    <InputLabel
-                        htmlFor="text"
-                        className={classNames(
-                            styles.title,
-                            styles.mb,
-                            styles.mt
-                        )}
-                    >
-                        {t("comment")}
-                    </InputLabel>
-                    <Controller
-                        name="text"
-                        control={control}
-                        render={({ field }) => (
-                            <TextField
-                                {...field}
-                                multiline
-                                maxRows={4}
-                                sx={{ width: "100%" }}
+                {t("name")}
+            </InputLabel>
+            <Controller
+                name="name"
+                control={control}
+                render={({ field }) => (
+                    <Input {...field} sx={{ width: "100%" }} />
+                )}
+            />
+            <Typography className={styles.error}>
+                {errors.name?.message}
+            </Typography>
+            <InputLabel
+                htmlFor="phone"
+                className={classNames(
+                    styles.title,
+                    styles.mb,
+                    styles.mt
+                )}
+            >
+                {t("phone")}
+            </InputLabel>
+            <Controller
+                name="phone"
+                control={control}
+                render={({ field }) => (
+                    <Input {...field} sx={{ width: "100%" }} />
+                )}
+            />
+            <Typography className={styles.error}>
+                {errors.phone?.message}
+            </Typography>
+            <Controller
+                name="delivery"
+                control={control}
+                render={({ field }) => (
+                    <FormControl {...field}>
+                        <FormLabel
+                            className={classNames(
+                                styles.title,
+                                styles.mb,
+                                styles.mt
+                            )}
+                        >
+                            {t("delivery")}
+                        </FormLabel>
+                        <RadioGroup>
+                            <FormControlLabel
+                                value="забрати в кав'ярні"
+                                control={<Radio />}
+                                label={t("var_1")}
                             />
-                        )}
+                            <FormControlLabel
+                                value="доставка перевізником"
+                                control={<Radio />}
+                                label={t("var_2")}
+                            />
+                        </RadioGroup>
+                    </FormControl>
+                )}
+            />
+            <Typography className={styles.error}>
+                {errors.delivery?.message}
+            </Typography>
+            <InputLabel
+                htmlFor="text"
+                className={classNames(
+                    styles.title,
+                    styles.mb,
+                    styles.mt
+                )}
+            >
+                {t("comment")}
+            </InputLabel>
+            <Controller
+                name="text"
+                control={control}
+                render={({ field }) => (
+                    <TextField
+                        {...field}
+                        multiline
+                        maxRows={4}
+                        sx={{ width: "100%" }}
                     />
-                    <Button
-                        // disabled={!isValid}
-                        className={styles.submitbutton}
-                        type="submit"
-                    >
-                        {t("submit")}
-                    </Button>
-                </ThemeProvider>
-            </Box>
-        </>
+                )}
+            />
+            <Button
+                // disabled={!isValid}
+                className={styles.submitbutton}
+                type="submit"
+            >
+                {t("submit")}
+            </Button>
+        </Box>
     );
 };
 

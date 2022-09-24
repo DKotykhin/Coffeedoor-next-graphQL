@@ -16,7 +16,7 @@ import "swiper/css/navigation";
 import styles from "./ItemList.module.scss";
 
 interface IItemList {
-    props: ICard[];
+    itemList: ICard[];
     id: string;
     title: string;
     subtitle: string;    
@@ -24,13 +24,13 @@ interface IItemList {
 }
 
 const ItemList: React.FC<IItemList> = ({
-    props,
+    itemList,
     id,
     title,
     subtitle,    
     filterArray    
 }) => {
-    const [list, setList] = useState(props);
+    const [list, setList] = useState(itemList);
     const router = useRouter();
 
     let i: number;
@@ -49,9 +49,9 @@ const ItemList: React.FC<IItemList> = ({
     }
 
     const onSelectSort = (sort: string) => {
-        let data = props;
+        let data = itemList;
         if (sort) {
-            data = props.filter(item => item.body[i].sort?.value === sort);
+            data = itemList.filter(item => item.body[i].sort?.value === sort);
         }
         setList(data);
     };
@@ -94,7 +94,7 @@ const ItemList: React.FC<IItemList> = ({
                                 exit={{ opacity: 0 }}
                                 // transition={{duration: 0.5}}
                             >
-                                <Card props={item} i={i} />
+                                <Card item={item} i={i} />
                             </motion.div>
                         </SwiperSlide>
                     ))}
