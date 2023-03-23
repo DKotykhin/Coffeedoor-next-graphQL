@@ -114,6 +114,7 @@ const BasketForm: React.FC<IBasketForm> = ({ onSubmit }) => {
                     styles.mb,
                     styles.mt
                 )}
+                sx={{whiteSpace: 'normal'}}
             >
                 {t("comment")}
             </InputLabel>

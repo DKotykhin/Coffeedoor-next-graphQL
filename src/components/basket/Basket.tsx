@@ -62,11 +62,7 @@ const Basket: React.FC = () => {
             <Modal
                 open={open}
                 onClose={handleClose}
-                closeAfterTransition
-                BackdropComponent={Backdrop}
-                BackdropProps={{
-                    timeout: 500,
-                }}
+                closeAfterTransition           
             >
                 <Fade in={open}>
                     <Box sx={{ bgcolor: "background.paper", boxShadow: 24 }} className={styles.modal}>
